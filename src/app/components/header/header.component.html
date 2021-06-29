@@ -1,0 +1,50 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" routerLink="/"
+        ><img
+          class="logo"
+          src="../../../assets/newLogo.png"
+          alt="Company Logo"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav mx-auto">
+          <ng-content select="[nav-middle]"></ng-content>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <ng-content select="[nav-right]"></ng-content>
+          <li class="nav-item lg-screen d-flex justify-content-start mt-2 mb-2">
+            <div class="lang">      
+              <select #langSelect (change)="onLanguageChange(langSelect.value)">
+                <option
+                  *ngFor="let lang of translate.getLangs()"
+                  [value]="lang"
+                  [selected]="lang === translate.currentLang"
+                  
+                >
+                 {{lang}}
+                </option>
+                
+              </select>
+             
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,158 @@
+@import "../../../styles";
+
+header {
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #141e30, #243b55); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #141e30, #243b55);
+  // border-bottom: 1px solid #ccc7c7;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.jc-end {
+  justify-content: flex-end;
+}
+.container {
+  max-width: 90vw;
+}
+.navbar-toggler {
+  color: white;
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  opacity: 1;
+}
+.navbar {
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #141e30, #243b55); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #141e30, #243b55);
+  justify-content: space-between;
+  padding: 0;
+}
+
+.login {
+  margin-right: 0.8rem;
+}
+
+.logo {
+  height: 40px;
+  width: 180px;
+}
+
+button {
+  color: $text-color;
+}
+
+.signup {
+  background-color: $primary-color;
+  color: $color-white;
+}
+
+.mat-raised-button {
+  border-radius: 10rem;
+}
+
+.mid-options {
+  align-items: center;
+  display: flex;
+
+  .badges {
+    column-gap: 3.5vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 19vw;
+  }
+}
+
+.nav-icon {
+  color: $color-white;
+  text-align: center;
+
+  &:hover {
+    color: cyan;
+    cursor: pointer;
+  }
+}
+
+.lang {
+  align-self: center;
+  margin-left: 0.5rem;
+
+  select {
+    border-radius: 5px;
+    border: 1px solid $blue;
+    background-color: transparent;
+    color: white;
+    padding: 0.55rem;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+    option {
+     background:#26385a;
+    }
+  }
+
+
+}
+
+// 980px
+
+@media only screen and (max-width: 980px) {
+  .mid-options {
+    .badges {
+      display: none;
+    }
+  }
+}
+// -----------------------------------------------
+// For Mobile Phones 0px to 480px
+// -----------------------------------------------
+
+@media only screen and (max-width: 480px) {
+  .container {
+    max-width: 100vw;
+  }
+
+  .login {
+    margin-right: 0;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .mat-raised-button {
+    padding: 0;
+  }
+
+  mat-toolbar {
+    padding: 5px;
+  }
+}
+
+// For small phones
+// @media only screen and (max-width: 990px){
+//   .mid-options{
+
+//     .badges{
+//       display: none;
+
+//     }
+// }
+// }
+@media only screen and (max-width: 280px) {
+  .logo {
+    width: 130px;
+  }
+
+  mat-toolbar {
+    padding: 0;
+  }
+}

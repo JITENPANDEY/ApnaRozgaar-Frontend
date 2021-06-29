@@ -1,0 +1,272 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+@import "../../../styles";
+.new_footer_area {
+    background: #fbfbfd;
+}
+
+
+.new_footer_top {
+    padding: 120px 0px 270px;
+    padding-top:2rem;
+    position: relative;
+      overflow-x: hidden;
+}
+.new_footer_area .footer_bottom {
+  margin-top: 1rem;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.footer_bottom {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #7f88a6;
+    padding: 27px 0px;
+}
+.new_footer_top .company_widget p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 28px;
+    color: #6a7695;
+    margin-bottom: 20px;
+}
+.new_footer_top .company_widget .f_subscribe_two .btn_get {
+    border-width: 1px;
+    margin-top: 20px;
+}
+.btn_get_two:hover {
+    background: transparent;
+    color: $blue;
+}
+.btn_get:hover {
+    color: #fff;
+    background: $blue;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+
+
+.new_footer_top .f_widget.about-widget .f_list li a:hover {
+    color: $blue;
+}
+.new_footer_top .f_widget.about-widget .f_list li {
+    margin-bottom: 11px;
+}
+.f_widget.about-widget .f_list li:last-child {
+    margin-bottom: 0px;
+}
+.f_widget.about-widget .f_list li {
+    margin-bottom: 15px;
+}
+.f_widget.about-widget .f_list {
+    margin-bottom: 0px;
+}
+.new_footer_top .f_social_icon a {
+    width: 44px;
+    height: 44px;
+    line-height: 43px;
+    background: transparent;
+    border: 1px solid #e2e2eb;
+    font-size: 24px;
+}
+.f_social_icon a {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 45px;
+    color: #858da8;
+    display: inline-block;
+    background: #ebeef5;
+    text-align: center;
+    -webkit-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.ti-facebook:before {
+    content: "\e741";
+}
+.ti-twitter-alt:before {
+    content: "\e74b";
+}
+.ti-vimeo-alt:before {
+    content: "\e74a";
+}
+.ti-pinterest:before {
+    content: "\e731";
+}
+
+.btn_get_two {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: $blue;
+    border-color: $blue;
+    color: #fff;
+}
+
+.btn_get_two:hover {
+    background: transparent;
+    color: $blue;
+}
+
+.new_footer_top .f_social_icon a:hover {
+    background: $blue;
+    border-color: $blue;
+  color:white;
+}
+.text{
+  color: #fff;
+  font-size: 1rem;
+}
+.new_footer_top .f_social_icon a + a {
+    margin-left: 4px;
+}
+.new_footer_top .f-title {
+    margin-bottom: 15px;
+    color: #263b5e;
+}
+.f_600 {
+    font-weight: 600;
+}
+.f_size_18 {
+    font-size: 18px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #4b505e;
+}
+.new_footer_top .f_widget.about-widget .f_list li a {
+    color: #6a7695;
+}
+
+
+.new_footer_top .footer_bg {
+    position: absolute;
+    bottom: 0;
+    background: url("http://droitthemes.com/html/saasland/img/seo/footer_bg.png") no-repeat scroll center 0;
+    width: 100%;
+    height: 266px;
+}
+
+.new_footer_top .footer_bg .footer_bg_one {
+    background: url("https://1.bp.blogspot.com/-mvKUJFGEc-k/XclCOUSvCnI/AAAAAAAAUAE/jnBSf6Fe5_8tjjlKrunLBXwceSNvPcp3wCLcBGAsYHQ/s1600/volks.gif") no-repeat center center;
+    width: 330px;
+    height: 105px;
+  background-size:100%;
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    -webkit-animation: myfirst 20s linear infinite;
+    animation: myfirst 20s linear infinite;
+}
+
+.new_footer_top .footer_bg .footer_bg_two {
+    background: url("https://1.bp.blogspot.com/-hjgfxUW1o1g/Xck--XOdlxI/AAAAAAAAT_4/JWYFJl83usgRFMvRfoKkSDGd--_Sv04UQCLcBGAsYHQ/s1600/cyclist.gif") no-repeat center center;
+    width: 88px;
+    height: 100px;
+  background-size:100%;
+    bottom: 0;
+    left: 38%;
+    position: absolute;
+    -webkit-animation: myfirst 27s linear infinite;
+    animation: myfirst 27s linear infinite;
+}
+.new_footer_top .footer_bg .footer_bg_three {
+  width: 100px;
+  height: 100px;
+  background-size:100%;
+  bottom: 0;
+  right: 0%;
+  position: absolute;
+  -webkit-animation: mySecond 25s linear infinite;
+  animation: mySecond 25s linear infinite;
+}
+
+
+
+@-moz-keyframes myfirst {
+  0% {
+    left: -25%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@-webkit-keyframes myfirst {
+  0% {
+    left: -25%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes myfirst {
+  0% {
+    left: -25%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+
+@-moz-keyframes mySecond {
+    0% {
+      right: -25%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+  
+  @-webkit-keyframes mySecond {
+    0% {
+      right: -25%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+  
+  @keyframes mySecond {
+    0% {
+      right: -25%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+
+
+  @media only screen and (max-width:425px){
+    .text{
+      text-align: center;
+    }
+    .new_footer_top .footer_bg .footer_bg_one{
+      width: 270px;
+      height: 80px;
+      -webkit-animation: myfirst 7s linear infinite;
+      animation: myfirst 7s linear infinite;
+    }
+
+    .new_footer_top .footer_bg .footer_bg_two{
+      width: 68px;
+      height: 80px;
+      -webkit-animation: myfirst 12s linear infinite;
+      animation: myfirst 12s linear infinite;
+    }
+    .new_footer_top .footer_bg .footer_bg_three{
+      width: 48px;
+      height: 90px;
+      -webkit-animation: mySecond 12s linear infinite;
+      animation: mySecond 12s linear infinite;
+    }
+  }
+/*************footer End*****************/
+

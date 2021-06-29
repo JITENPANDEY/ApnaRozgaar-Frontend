@@ -1,0 +1,197 @@
+@import '../../../styles';
+@import '../header/header.component';
+@import '../user-landing-page/user-landing-page.component';
+
+
+$profile-color: #4a90e2;
+
+
+.user-profile-page {
+  // background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-color: $bg-color;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 70vw;
+  padding: 1rem 5rem;
+  width: 70vw;
+}
+
+.profile-card {
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+
+.profile-pic {
+  width: 20%;
+
+}
+
+.profile-details {
+  width: 75%;
+}
+
+.dp {
+  margin-left: 1.5rem;
+  opacity: .7;
+}
+
+.pp {
+  border-radius: 50%;
+  height: 100px;
+  width: 80%;
+}
+
+.profile-head {
+  background-image: linear-gradient(to right, #4481eb 0%, #04befe 100%);
+}
+
+mat-card-title {
+  color: $color-white;
+}
+
+.profile-head-details {
+  color: #d5e5f8;
+}
+
+.sub-desc {
+  color: $text-color;
+}
+
+.upload-resume {
+  background-color: rgb(252, 252, 252);
+  border: 1px solid $border;
+  margin-top: 1rem;
+  padding: 0 3rem;
+  text-align: center;
+}
+
+.btn-upload {
+  background-color: $profile-color;
+  color: $color-white;
+  margin: .5rem;
+}
+
+.btn-save {
+  align-self: flex-end;
+  background-color: $profile-color;
+  color: $color-white;
+  display: flex;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+.update-pp {
+  background-color: $color-white;
+  border: none;
+  border-radius: 5px;
+}
+
+label {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.adhar {
+  width: 80%;
+}
+
+// .inner-container > * {
+//   margin-left: 11rem;
+//   width: 60%;
+// }
+
+// .card-full-width {
+//   // display: block;
+//   // margin: 0 auto 1rem;
+//   width: 100%;
+// }
+
+// .upload-label {
+//   cursor: pointer;
+// }
+
+
+// .mat-chip {
+//   background-color: $background;
+//   font-weight: normal ;
+// }
+
+// button {
+//   &:disabled {
+//     background-color: $color-white;
+//     border: 1px solid $primary-color;
+//     color: $primary-color;
+//     // opacity: .5;
+//   }
+// }
+
+
+// 980px
+
+@media only screen and (max-width: 980px) {
+  .container {
+    // margin: 0;
+    padding: 0;
+    width: 90vw;
+  }
+
+  .dp {
+    margin-left: .5rem;
+  }
+}
+
+
+// -----------------------------------------------
+// For 0px to 768px
+// -----------------------------------------------
+
+@media only screen and (max-width: 768px) {
+
+
+  .container {
+    max-width: 70vw;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+// -----------------------------------------------
+// For 0px to 420px
+// -----------------------------------------------
+
+@media only screen and (max-width: 420px) {
+
+  .container {
+    max-width: 90vw;
+  }
+
+  .profile-pic {
+    width: 35%;
+  }
+
+  .profile-card {
+    margin: .7rem 0;
+    padding: 1rem;
+  }
+
+  .btn-upload {
+    padding: 0 .3rem;
+  }
+
+  .adhar {
+    width: 100%;
+  }
+
+
+}
+
+
+

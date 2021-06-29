@@ -1,0 +1,247 @@
+
+<app-header class="head">
+  <div nav-right class="mid-options">
+    <div class="badges">
+      <a class="nav-icon" routerLink="/user">
+        <i class="fas fa-home"></i>
+        <div>{{ "home.home" | translate }}</div>
+      </a>
+      <a class="nav-icon active" routerLink="/user-profile">
+        <i class="far fa-id-card"></i>
+        <div>{{ "user.Profile" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/saved">
+        <i class="fas fa-heart"></i>
+        <div>{{ "user.Saved" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/applied">
+        <i class="fas fa-check"></i>
+        <div>{{ "user.Applied" | translate }}</div>
+      </a>
+    </div>
+    <button mat-flat-button class="dropdown" (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+
+    <mat-menu #menu="matMenu"> </mat-menu>
+  </div>
+
+  <!-- Mobile nav start -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/user">
+      <mat-icon matSuffix color="">home</mat-icon>{{ "home.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user-profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "user.myProfile" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/saved">
+      <mat-icon matSuffix color="">favorite_border</mat-icon
+      >{{ "user.savedJobs" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/applied">
+      <mat-icon matSuffix color="">done</mat-icon
+      >{{ "user.appliedJobs" | translate }}
+    </button>
+    <button mat-menu-item (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile nav end -->
+</app-header>
+
+<div class="user-profile-page">
+  <section class="container">
+    <mat-card class="profile-card profile-head d-flex justify-content-start">
+      <div class="profile-pic">
+        <img
+          class="pp"
+          [src]="myimage"
+          alt="profile picture"
+          accept=".png, .jpg, .jpeg"
+        />
+
+        <div class="mt-2 dp">
+          <input type="file" (change)="onChange($event, 'pp')" id="pp" hidden />
+          <button class="update-pp" for="pp">
+            <label for="pp"> {{ "user.update" | translate }} </label>
+          </button>
+        </div>
+
+        <!-- <input type="file" (change)="onChange($event)" /> -->
+      </div>
+      <div class="profile-details mt-3">
+        <mat-card-title
+          >{{ userDetails.name }}
+          <sup *ngIf="userDetails.seekerSignup.verified">
+            <mat-icon style="color: white"> verified </mat-icon>
+          </sup>
+          </mat-card-title
+        >
+
+        <div class="profile-head-details">
+          <div class="phone">
+            <mat-icon matSuffix>phone</mat-icon> {{ userDetails.phonenumber }}
+          </div>
+          <div *ngIf="userDetails.permanentaddress" class="location">
+            <mat-icon matSuffix>location_on</mat-icon>
+            {{ userDetails.permanentaddress }}
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="profile-card">
+      <div class="mat-h2">Attach Adhar</div>
+      <div class="sub-desc">
+        Adhar is the most important document recuiters look for. You will be
+        verified after uploading adhar.
+      </div>
+      <div class="upload-resume">
+        <img
+          class="adhar pt-3"
+          [src]="myadhar"
+          alt="Adhar Card"
+          accept=".png, .jpg, .jpeg"
+          width="500px"
+        />
+
+        <input
+          type="file"
+          (change)="onChange($event, 'adhar')"
+          id="upload-resume"
+          hidden
+        />
+
+        <button mat-button class="btn-upload button-blue">
+          <label class="upload-label" for="upload-resume">UPLOAD ADHAR</label>
+        </button>
+        <p class="sub-desc">Supported Formats: doc, docs, rtf, pdf, upto 2MB</p>
+
+        <!-- <div class="profile-pic">
+          <img
+            class="pp"
+            [src]="myimage"
+            alt="profile picture"
+            accept=".png, .jpg, .jpeg"
+          />
+
+          <div class="mt-2 dp">
+            <input type="file" (change)="onChange($event)" id="pp" hidden />
+            <button class="update-pp" for="pp">
+              <label for="pp"> {{ "user.update" | translate }} </label>
+            </button>
+          </div>
+        </div> -->
+      </div>
+    </mat-card>
+
+    <mat-card class="profile-card">
+      <div class="mat-h2">{{ "user.userDetails" | translate }}</div>
+
+      <div class="form-details">
+        <form [formGroup]="userDetailsForm">
+          <div class="form-group row">
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.name" | translate }}</mat-label>
+              <input
+                type="text"
+                [disabled]="true"
+                [value]="userDetails.name"
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.aadhar" | translate }}</mat-label>
+              <input
+                type="text"
+                [disabled]="true"
+                [value]="userDetails.seekerSignup.adharNumber"
+                matInput
+              />
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.dob" | translate }}</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.gender" | translate }}</mat-label>
+              <mat-select name="gender" formControlName="gender">
+                <mat-option value="male">
+                  {{ "user.male" | translate }}
+                </mat-option>
+                <mat-option value="female">
+                  {{ "user.female" | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group row">
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.qualification" | translate }}</mat-label>
+              <mat-select name="qualification" formControlName="qualification">
+                <mat-option value="illiterate"> Illiterate </mat-option>
+                <mat-option value="primary"> Primary (5th Pass) </mat-option>
+                <mat-option value="medium"> Medium (8th Pass) </mat-option>
+                <mat-option value="matric"> Matric (10th Pass) </mat-option>
+                <mat-option value="inter">
+                  Intermediate (12th Pass)
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.exp" | translate }}</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Experience"
+                formControlName="experience"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="form-group row">
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.city" | translate }}</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Current City"
+                formControlName="permanentaddress"
+              />
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="outline">
+              <mat-label>{{ "user.language" | translate }}</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Language"
+                formControlName="language"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-around">
+            <button mat-button class="btn-save button-blue" (click)="onSaveUserDetails()">
+              {{ "user.Save" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </section>
+</div>

@@ -1,0 +1,300 @@
+<app-spinner></app-spinner>
+<app-header>
+  <!-- This is only visible on mobile screen -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/" class="active">
+      <mat-icon matSuffix color="">home</mat-icon
+      >{{ "company.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/company/profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "company.myAcc" | translate }}
+    </button>
+    <button mat-menu-item (click)="onCompanyLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "company.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile screen navbar end -->
+  <div nav-right class="lg-nav-items nav-middle">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link">{{
+        "company.home" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/company/profile/" class="nav-link">{{
+        "company.myAcc" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a href="" (click)="onCompanyLogout()" class="nav-link">{{
+        "company.logout" | translate
+      }}</a>
+    </li>
+    <mat-menu #menu="matMenu"></mat-menu>
+  </div>
+</app-header>
+<main>
+  <div class="container">
+    <mat-card class="card-container">
+      <form #companyForm="ngForm" [formGroup]="updateJobForm">
+        <div class="inner-container">
+          <div class="form-group row">
+            <h1 class="">Update Your Job</h1>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Job Title</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Job Title"
+                value=""
+                required
+                formControlName="title"
+              />
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('title').invalid &&
+                  updateJobForm.get('title').touched
+                "
+              >
+                <mat-error *ngIf="updateJobForm.get('title').errors?.required"
+                  >Title is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('title').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Experience(in years)</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Experience"
+                value=""
+                required
+                formControlName="experience"
+              />
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('experience').invalid &&
+                  updateJobForm.get('experience').touched
+                "
+              >
+                <mat-error
+                  *ngIf="updateJobForm.get('experience').errors?.required"
+                  >Experience is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('experience').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-6 col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Minimum Salary</mat-label>
+              <input
+                type="email"
+                matInput
+                placeholder="Minimum Salary"
+                value=""
+                required
+                formControlName="minSalary"
+              />
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('minSalary').invalid &&
+                  updateJobForm.get('minSalary').touched
+                "
+              >
+                <mat-error
+                  *ngIf="updateJobForm.get('minSalary').errors?.required"
+                  >Minimum Salary is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('minSalary').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Maximum Salary</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Maximum Salary"
+                value=""
+                required
+                formControlName="maxSalary"
+              />
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('maxSalary').invalid &&
+                  updateJobForm.get('maxSalary').touched
+                "
+              >
+                <mat-error
+                  *ngIf="updateJobForm.get('maxSalary').errors?.required"
+                  >Maximum Salary is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('maxSalary').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field class="card-full-width col-md-6" appearance="outline">
+              <mat-label>Job description</mat-label>
+              <textarea
+                matInput
+                placeholder="description"
+                value=""
+                formControlName="description"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Select a Category</mat-label>
+              <mat-select
+                [(value)]="selectedCategory"
+                required
+                formControlName="category"
+              >
+                <mat-option value="Driver">Driver</mat-option>
+                <mat-option value="Peon">Peon</mat-option>
+                <mat-option value="Cook">Cook</mat-option>
+                <mat-option value="Delivery Boy">Delivery Boy</mat-option>
+                <mat-option value="Household Worker"
+                  >Household Worker</mat-option
+                >
+                <mat-option value="Repairing Work">Repairing Work</mat-option>
+                <mat-option value="Beautician">Beautician</mat-option>
+                <mat-option value="Security">Security</mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('category').invalid &&
+                  updateJobForm.get('category').touched
+                "
+              >
+                <mat-error *ngIf="updateJobForm.get('category').errors?.required"
+                  >category is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('category').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Last Date to Apply</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                required
+                formControlName="lastDate"
+              />
+
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('lastDate').invalid &&
+                  updateJobForm.get('lastDate').touched
+                "
+              >
+                <mat-error
+                  *ngIf="updateJobForm.get('lastDate').errors?.required"
+                  >Last date is required</mat-error
+                >
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Location</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Location"
+                value=""
+                required
+                formControlName="location"
+              />
+              <mat-error
+                *ngIf="
+                  updateJobForm.get('location').invalid &&
+                  updateJobForm.get('location').touched
+                "
+              >
+                <mat-error
+                  *ngIf="updateJobForm.get('location').errors?.required"
+                  >Location is required</mat-error
+                >
+              </mat-error>
+
+              <mat-icon
+                matSuffix
+                *ngIf="updateJobForm.get('location').valid"
+                style="color: #0bc00b; margin-right: 5px"
+                >check</mat-icon
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="updateBtn">
+          <button
+            class="btn btn-primary"
+            [disabled]="!companyForm.form.valid"
+            (click)="onUpdateJob()"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</main>
+

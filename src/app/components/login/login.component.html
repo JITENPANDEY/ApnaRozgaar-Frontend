@@ -1,0 +1,235 @@
+<div>
+  <app-header>
+    <div nav-right>
+      <li class="nav-item lg-screen d-flex justify-content-between mt-2">
+        <a class="nav-link lin" routerLink="/login"
+          ><button mat-raised-button class="button-blue px-3 mb-2">
+            {{ "home.login" | translate }}
+          </button></a
+        >
+        <a class="nav-link" routerLink="/signup"
+          ><button mat-raised-button class="button-success px-3">
+            {{ "home.createAccount" | translate }}
+          </button></a
+        >
+      </li>
+    </div>
+  </app-header>
+</div>
+<!-- main  d-flex justify-content-around-->
+<div class="main container d-flex justify-content-around">
+  <div class="center-content">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Login Here</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group animationDuration="0ms">
+          <form [formGroup]="userLoginForm" #userForm="ngForm">
+            <mat-tab label="FOR USERS">
+              <div *ngIf="!Uvalid" class="card-full-width invalid">
+                {{ Uerrormsg }}
+              </div>
+              <mat-form-field class="card-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  name="user-email"
+                  matInput
+                  placeholder="Email"
+                  formControlName="userEmail"
+                />
+                <mat-error
+                  *ngIf="
+                    userLoginForm.get('userEmail').invalid &&
+                    userLoginForm.get('userEmail').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userLoginForm.get('userEmail').errors?.required"
+                    >Email is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      userLoginForm.get('userEmail').dirty &&
+                      !userLoginForm.get('userEmail').errors?.required
+                    "
+                    >Invalid email Id</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userLoginForm.get('userEmail').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  [type]="Uhide ? 'password' : 'text'"
+                  name="user-password"
+                  matInput
+                  placeholder="Password"
+                  formControlName="userPassword"
+                />
+                <mat-error
+                  *ngIf="
+                    userLoginForm.get('userPassword').invalid &&
+                    userLoginForm.get('userPassword').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userLoginForm.get('userPassword').errors?.required"
+                    >Password is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="userLoginForm.get('userPassword').errors?.minlength"
+                    >Password must contain minimum 8 characters</mat-error
+                  >
+                </mat-error>
+
+                <mat-icon
+                  matSuffix
+                  *ngIf="userLoginForm.get('userPassword').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="Uhide = !Uhide"
+                  >{{ Uhide ? "visibility_off" : "visibility" }}</mat-icon
+                >
+              </mat-form-field>
+              <button
+                id="userLogin"
+                mat-button
+                [disabled]="!userForm.form.valid || loadingUser"
+                (click)="onUserLogin()"
+              >
+                Login
+              </button>
+
+              <div class="forgot">
+                <a class="fg" routerLink="/user/forgotpassword"
+                  >Forgot your password?</a
+                >
+              </div>
+            </mat-tab>
+          </form>
+          <form [formGroup]="companyLoginForm" #myForm="ngForm">
+            <mat-tab label="FOR COMPANY">
+              <div *ngIf="!Cvalid" class="card-full-width invalid">
+                {{ Cerrormsg }}
+              </div>
+              <mat-form-field class="card-full-width">
+                <mat-label>Company Email</mat-label>
+                <input
+                  type="email"
+                  name="company-email"
+                  matInput
+                  placeholder="Email"
+                  formControlName="companyEmail"
+                />
+                <mat-error
+                  *ngIf="
+                    companyLoginForm.get('companyEmail').invalid &&
+                    companyLoginForm.get('companyEmail').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      companyLoginForm.get('companyEmail').errors?.required
+                    "
+                    >Email is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      companyLoginForm.get('companyEmail').dirty &&
+                      !companyLoginForm.get('companyEmail').errors?.required
+                    "
+                    >Invalid email Id</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companyLoginForm.get('companyEmail').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  [type]="Chide ? 'password' : 'text'"
+                  name="company_password"
+                  matInput
+                  placeholder="Password"
+                  formControlName="companyPassword"
+                />
+                <mat-error
+                  *ngIf="
+                    companyLoginForm.get('companyPassword').invalid &&
+                    companyLoginForm.get('companyPassword').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      companyLoginForm.get('companyPassword').errors?.required
+                    "
+                    >Password is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      companyLoginForm.get('companyPassword').errors?.minlength
+                    "
+                    >Password must contain minimum 8 characters</mat-error
+                  >
+                </mat-error>
+
+                <mat-icon
+                  matSuffix
+                  *ngIf="companyLoginForm.get('companyPassword').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="Chide = !Chide"
+                  >{{ Chide ? "visibility_off" : "visibility" }}</mat-icon
+                >
+              </mat-form-field>
+              <button
+                id="companyLogin"
+                mat-button
+                color="primary"
+                [disabled]="!myForm.form.valid || loadingComp"
+                (click)="onCompanyLogin()"
+              >
+                Login
+              </button>
+              <div class="forgot">
+                <a class="fg" routerLink="/company/forgotpassword"
+                  >Forgot your password?</a
+                >
+              </div>
+            </mat-tab>
+          </form>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="signup-card">
+      <div class="no-account">Don't have an ApnaRozgar account?</div>
+      <div>
+        <a routerLink="/signup"
+          ><button mat-button class="sign-up">Sign Up</button></a
+        >
+      </div>
+    </mat-card>
+  </div>
+</div>
+<router-outlet></router-outlet>

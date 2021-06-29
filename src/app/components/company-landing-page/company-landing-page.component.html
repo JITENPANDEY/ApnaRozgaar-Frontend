@@ -1,0 +1,266 @@
+<app-header>
+  <!-- search bar started -->
+  <div #searchHeader nav-middle class="search-header">
+    <div class="search-job d-flex align-items-center mb-1">
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        class="search"
+        name="searchJobTitle"
+        placeholder="{{ 'company.search' | translate }}"
+        type="text"
+        [(ngModel)]="searchJobTitle"
+        (ngModelChange)="search()"
+      />
+    </div>
+  </div>
+  <!--   search bar end -->
+
+  <!-- This is only visible on mobile screen -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/" class="active">
+      <mat-icon matSuffix color="">home</mat-icon
+      >{{ "company.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/company/profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "company.myAcc" | translate }}
+    </button>
+    <button mat-menu-item (click)="onCompanyLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "company.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile screen navbar end -->
+
+  <div nav-right class="lg-nav-items nav-middle">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link active">{{
+        "company.home" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/company/profile/" class="nav-link">{{
+        "company.myAcc" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a href="" (click)="onCompanyLogout()" class="nav-link">{{
+        "company.logout" | translate
+      }}</a>
+    </li>
+    <mat-menu #menu="matMenu"></mat-menu>
+  </div>
+</app-header>
+
+<main>
+  <div class="container">
+    <!-- banner -->
+    <app-banner></app-banner>
+
+    <notifier-container></notifier-container>
+    <!-- MAIN CARDS STARTS HERE -->
+    <div class="main__cards">
+      <div class="banner-card">
+        <i class="fa fa-user-md fa-2x text-lightblue" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">{{ "company.numJobpost" | translate }}</p>
+          <span class="font-bold text-title">{{ allJobsLength }}</span>
+        </div>
+      </div>
+      <div class="banner-card">
+        <i class="fab fa-angellist fa-2x text-warning" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">{{ "company.numActpost" | translate }}</p>
+          <span class="font-bold text-title">{{ activeJobs }}</span>
+        </div>
+      </div>
+
+      <div class="banner-card">
+        <i class="fa fa-window-close fa-2x text-red" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">{{ "company.numclosedJob" | translate }}</p>
+          <span class="font-bold text-title">{{
+            allJobsLength - activeJobs
+          }}</span>
+        </div>
+      </div>
+
+      <!-- <div class="banner-card">
+        <i class="fa fa-thumbs-up fa-2x text-success" aria-hidden="true"></i>
+        <div class="card_inner">
+          <p class="text-primary-p">Number of workers in the company</p>
+          <span class="font-bold text-title">645</span>
+        </div>
+      </div> -->
+    </div>
+    <!-- MAIN CARDS ENDS HERE -->
+    <!-- Search and filter -->
+    <div class="row justify-content-between my-3">
+      <div class="col-md-4">
+        <p class="my-1 mx-1 text-primary-2">
+          {{ "company.filterJobCategory" | translate }}
+        </p>
+        <div class="filter-field p-2">
+          <mat-select
+            [(value)]="selectedCategory"
+            required
+            [formControl]="category"
+            (selectionChange)="onFilter($event)"
+          >
+            <mat-option value="all">{{ "company.all" | translate }}</mat-option>
+            <mat-option value="Driver">{{
+              "company.driver" | translate
+            }}</mat-option>
+            <mat-option value="Peon">{{
+              "company.peon" | translate
+            }}</mat-option>
+            <mat-option value="Cook">{{
+              "company.cook" | translate
+            }}</mat-option>
+            <mat-option value="Delivery Boy">{{
+              "company.deliveryBoy" | translate
+            }}</mat-option>
+            <mat-option value="Household Worker">{{
+              "company.household" | translate
+            }}</mat-option>
+            <mat-option value="Repairing Work">{{
+              "company.repairng" | translate
+            }}</mat-option>
+            <mat-option value="Beautician">{{
+              "company.beautician" | translate
+            }}</mat-option>
+            <mat-option value="Security">{{
+              "company.security" | translate
+            }}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <p class="my-1 mx-1 text-primary-2" style="visibility: hidden">
+          {{ "company.addnewjob" | translate }}
+        </p>
+        <button
+          mat-button
+          class="btn-success w-100"
+          routerLink="/company/job/add"
+        >
+          <mat-icon matSuffix class="mx-1">add_circle</mat-icon
+          >{{ "company.addjob" | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="searchedJobNotFound" class="no-job">
+      <p class="mat-h2">{{ "company.SearchNotFound" | translate }}</p>
+    </div>
+
+    <div *ngIf="noSavedJob" class="no-job">
+      <p class="mat-h2">{{ "company.noPost" | translate }}</p>
+    </div>
+    <span class="j-main-heading" *ngIf="!noSavedJob && !searchedJobNotFound">{{
+      "company.latestJobs" | translate
+    }}</span>
+    <div class="row">
+      <div
+        class="col-md-6 col-12 col-lg-4"
+        *ngFor="
+          let job of allJobforCategory
+            | paginate: { itemsPerPage: 6, currentPage: currentPage }
+        "
+      >
+        <mat-card class="card post-card">
+          <div class="d-flex justify-content-between">
+            <mat-card-title>{{ job.title }}</mat-card-title>
+            <a routerLink="/company/job/applicants/{{ job.jobId }}"
+              ><mat-icon
+                matSuffix
+                class="text-lightblue"
+                matTooltip="View Applicants"
+                >visibility</mat-icon
+              ></a
+            >
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>business</mat-icon>
+            <span class="mx-1">
+              {{ "company.company" | translate }} :
+              {{ companyDetails.companyName }}
+            </span>
+          </div>
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>reorder</mat-icon>
+            <span class="mx-1">
+              {{ "company.comapnyCategory" | translate }} : {{ job.category }}
+            </span>
+          </div>
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>location_on</mat-icon>
+            <span class="mx-1">
+              {{ "company.location" | translate }} : {{ job.location }}
+            </span>
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>event</mat-icon>
+            <span class="mx-1">
+              {{ "company.postedOn" | translate }} : {{ job.createdate | date }}
+            </span>
+          </div>
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>event</mat-icon>
+            <span class="mx-1">
+              {{ "company.lastDate" | translate }} : {{ job.lastDate | date }}
+            </span>
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <img src="../../../assets/rupee-indian.png" class="mx-1" alt="" />
+            <span class="mx-1">
+              {{ "company.salaryRange" | translate }}:
+              {{ job.minSalary | currency: "INR":"symbol":".0" }} -
+              {{ job.maxSalary | currency: "INR":"symbol":".0" }}
+              {{ "company.perMonth" | translate }}
+            </span>
+          </div>
+          <div
+            class="d-flex justify-content-between mt-3"
+            *ngIf="job.closehirinig == 'No'"
+          >
+            <button
+              class="btn-basic button-update"
+              (click)="onUpdate(job.jobId)"
+            >
+              {{ "company.update" | translate }}
+            </button>
+            <button
+              class="btn-basic button-danger"
+              (click)="onDeleteJob(job.jobId)"
+            >
+              {{ "company.delete" | translate }}
+            </button>
+          </div>
+          <div
+            class="d-flex justify-content-between mt-3"
+            *ngIf="job.closehirinig != 'No'"
+          >
+            <button
+              class="btn-basic btn-success"
+              style="color: white"
+              [disabled]="true"
+            >
+              {{ "company.closed" | translate }}
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <pagination-controls
+      autoHide="true"
+      responsive="true"
+      (pageChange)="currentPage = $event"
+    >
+    </pagination-controls>
+  </div>
+</main>

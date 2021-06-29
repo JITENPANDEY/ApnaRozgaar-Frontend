@@ -1,0 +1,335 @@
+<app-header>
+  <!-- This is only visible on mobile screen -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/">
+      <mat-icon matSuffix color="">home</mat-icon
+      >{{ "company.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/company/profile/">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "company.myAcc" | translate }}
+    </button>
+
+    <button mat-menu-item (click)="onCompanyLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "company.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile screen navbar end -->
+
+  <!-- for large screen navbar -->
+
+  <div nav-right class="lg-nav-items nav-middle">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link">{{ "company.home" | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/company/profile/" class="nav-link active">{{
+        "company.myAcc" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a href="" (click)="onCompanyLogout()" class="nav-link">{{
+        "company.logout" | translate
+      }}</a>
+    </li>
+    <mat-menu #menu="matMenu"></mat-menu>
+  </div>
+  <!-- large screen navbar  -->
+</app-header>
+
+<div class="outer-container">
+  <div class="company-profile-page container">
+    <mat-card class="banner d-flex justify-content-start align-items-center">
+      <div class="profile-pic flex-1">
+        <img
+          class="pp"
+          [src]="myimage"
+          alt="profile picture"
+          width="150px"
+          height="150px"
+        />
+        <div class="photo">
+          <input
+            type="file"
+            (change)="onChange($event, 'pp')"
+            id="upload-pic"
+            hidden
+          />
+          <div class="child">
+            <button mat-button class="btn-upload">
+              <label class="upload-label" for="upload-pic"
+                ><mat-icon>photo_camera</mat-icon></label
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="profile-details">
+        <mat-card-title>{{ company.companyName }}</mat-card-title>
+        <div class="profile-head-details">
+          <div class="loc">
+            {{ company.city }}
+            {{ company.state }} {{ company.country }}
+          </div>
+          <div class="email">
+            {{ company.email }}
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card style="margin-bottom: 2rem">
+      <!-- verification field -->
+      <div class="inner-container">
+        <div class="form-group row verify">
+          <mat-radio-group
+            aria-label="Select an option"
+            class="d-flex flex-column"
+          >
+            <mat-label class="lable mb-2">Verify your account using </mat-label>
+            <mat-radio-button
+              [value]="1"
+              class="mx-1 my-2"
+              id="aadhaar"
+              checked
+              (change)="radioChange($event)"
+              >Aadhaar</mat-radio-button
+            >
+            <mat-radio-button
+              [value]="2"
+              class="mx-1"
+              id="gst"
+              (change)="radioChange($event)"
+              >GST (Goods & Services Tax)</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <!-- verification field end -->
+
+        <!-- adhhar div starts -->
+        <mat-card class="aadhaar-section">
+          <div class="mat-h2">Attach Adhar</div>
+          <div class="sub-desc">
+            Adhar is the most important document recuiters look for. You will be
+            verified after uploading adhar.
+          </div>
+          <div class="upload-resume">
+            <img
+              class="adhar pt-3 text-align-center"
+              [src]="myadhar"
+              alt="Adhar Card"
+              accept=".png, .jpg, .jpeg"
+            />
+
+            <input
+              type="file"
+              (change)="onChange($event, 'adhar')"
+              id="upload-resume"
+              hidden
+            />
+            <div class="text-center my-2">
+              <button mat-button class="btn-upload button-blue">
+                <label class="upload-label" for="upload-resume"
+                  >UPLOAD ADHAR</label
+                >
+              </button>
+            </div>
+            <p class="sub-desc text-center">
+              Supported Formats: doc, docs, rtf, pdf, upto 2MB
+            </p>
+          </div>
+        </mat-card>
+        <!-- adhhar div end -->
+
+        <!-- GST div starts -->
+        <div class="gst">
+          <mat-form-field
+            class="card-full-width col-12"
+            appearance="outline"
+          >
+            <mat-label>Enter your GST number</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Enter your GST number"
+              width="100%"
+              [(ngModel)]="gstNo"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- GST div end -->
+    </mat-card>
+    <mat-card class="form">
+      <form #companyForm="ngForm" [formGroup]="companyProfileForm">
+        <div class="inner-container">
+          <h1 class="">Personal Details</h1>
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Company Moto</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Company Moto"
+                value=""
+                formControlName="moto"
+              />
+              <mat-icon matPrefix>laptop_mac</mat-icon>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Company Name</mat-label>
+              <input
+                type="text"
+                [disabled]="true"
+                [value]="company.companyName"
+                matInput
+              />
+              <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-12"
+              appearance="outline"
+            >
+              <mat-label>Company Work Email</mat-label>
+              <input
+                type="text"
+                [disabled]="true"
+                [value]="company.email"
+                matInput
+              />
+              <mat-icon matPrefix>mail</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group row">
+            <mat-form-field class="card-full-width" appearance="outline">
+              <mat-label>About Company</mat-label>
+              <textarea
+                rows="4"
+                cols="40"
+                matInput
+                placeholder="About company"
+                value=""
+                formControlName="description"
+              ></textarea>
+              <!-- <mat-icon matPrefix>business</mat-icon> -->
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Company Website</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="company Website"
+                value=""
+                formControlName="website"
+              />
+              <mat-icon matPrefix>link</mat-icon>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Address</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Company Address"
+                value=""
+                required
+                formControlName="address"
+              />
+              <mat-icon matPrefix>home</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>City</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="City"
+                value=""
+                formControlName="city"
+                required
+              />
+              <mat-icon matPrefix>location_city</mat-icon>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>State</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="State"
+                value=""
+                required
+                formControlName="state"
+              />
+              <mat-icon matPrefix>my_location</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="form-group row">
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Country</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Country"
+                value=""
+                required
+                formControlName="country"
+              />
+              <mat-icon matPrefix>my_location</mat-icon>
+            </mat-form-field>
+            <mat-form-field
+              class="card-full-width col-md-6"
+              appearance="outline"
+            >
+              <mat-label>Pincode</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Pincode"
+                value=""
+                required
+                formControlName="pinCode"
+              />
+              <mat-icon matPrefix>my_location</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="saveBtn">
+          <button
+            class="btn btn-primary"
+            [disabled]="!companyForm.form.valid"
+            (click)="onSave()"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

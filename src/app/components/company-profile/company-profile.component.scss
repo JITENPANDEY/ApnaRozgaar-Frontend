@@ -1,0 +1,189 @@
+@import "../../../styles";
+@import "../company-landing-page/company-landing-page.component";
+$profile-color: #4a90e2;
+
+.inner-container > * {
+  width: 100%;
+}
+.inner-container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+.outer-container {
+  background-color: $bg-color;
+}
+.container {
+  max-width: 70vw;
+  padding: 1rem 5rem;
+  width: 70vw;
+}
+.banner {
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background-image: linear-gradient(to left, #4481eb 0%, #04befe 100%);
+}
+.form {
+  border-radius: 15px;
+}
+.welcome {
+  color: $text-color;
+  margin-right: 1rem;
+}
+.profile-pic {
+  width: 20%;
+}
+
+.profile-details {
+  width: 75%;
+}
+
+.pp {
+  border-radius: 50%;
+  border: 4px solid aquamarine;
+  height: 100px;
+  width: 100px;
+}
+
+.profile-head {
+  background-color: $profile-color;
+}
+
+mat-card-title {
+  color: $color-white;
+}
+
+.profile-head-details {
+  color: #d5e5f8;
+}
+mat-form-field mat-icon {
+  color: $grey-700;
+  margin-right: 0.5rem;
+}
+.saveBtn {
+  margin-top: 2rem;
+  text-align: center;
+}
+.addjob {
+  color: $secondary;
+  border-radius: 50px;
+  height: 40px;
+  margin-top: 0.5rem;
+  padding: 0 1.2rem;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+.responsive-nav {
+  display: none;
+}
+.lable {
+  margin-right: 2rem;
+  margin-left: 5px;
+  color: $green;
+  font-size: 1rem;
+}
+.verify {
+  margin-bottom: 1rem;
+}
+.nav-middle li {
+  font-size: 1rem;
+  a.active {
+    color: cyan;
+  }
+  a:hover {
+    color: cyan;
+  }
+}
+.aadhaar-section {
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+}
+.gst {
+  display: none;
+}
+.profile-pic {
+  position: relative;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin-right: 2rem;
+}
+.child {
+  position: absolute;
+  top: 70%;
+  left: 60%;
+  &:focus, &:active, &hover{
+    background:none;
+    outline:none;
+  }
+  button {
+    mat-icon {
+      color: #f8ee92;
+      cursor: pointer;
+      font-size: 22px;
+    }
+  }
+}
+.btn-upload label {
+  cursor: pointer;
+}
+.upload-resume img {
+  width: 100%;
+  height: 300px;
+  border: 2px dashed #0099ff;
+  background:$bg-color3;
+  padding:1rem;
+}
+mat-label{
+  color: #04befe;
+}
+@media only screen and (max-width: 768px) {
+  .outer-container .container {
+    width: 100vw;
+    max-width: 95vw;
+    padding: 0;
+    padding-top: 2rem;
+  }
+  .responsive-nav {
+    display: block;
+  }
+  .inner-container {
+    max-width: 100vw;
+    margin: 0 auto;
+    text-align: -webkit-center;
+  }
+  .inner-container > * {
+    max-width: 100vw;
+  }
+  .profile-pic img {
+    width: 80px;
+    height: 80px;
+  }
+  .profile-details > * {
+    text-align: start;
+  }
+  .profile-head-details .loc mat-icon {
+    display: none;
+  }
+  .profile-head-details .email mat-icon {
+    display: none;
+  }
+  .lg-nav-items {
+    display: none;
+  }
+  .upload-resume img{
+    height:200px;
+  }
+  .lg-nav-items{
+    display: none;
+  }
+  .gst{
+    padding: 0 12px;
+  }
+  .child{
+    top: 50%;
+    left: 50%;
+  }
+}

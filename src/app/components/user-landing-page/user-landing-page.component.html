@@ -1,0 +1,614 @@
+<app-spinner></app-spinner>
+<app-header class="head">
+  <div nav-right class="mid-options">
+    <div class="badges">
+      <a class="nav-icon active" routerLink="/user">
+        <i class="fas fa-home"></i>
+        <div>{{ "home.home" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user-profile">
+        <i class="far fa-id-card"></i>
+        <div>{{ "user.Profile" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/saved">
+        <i class="fas fa-heart"></i>
+        <div>{{ "user.Saved" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/applied">
+        <i class="fas fa-check"></i>
+        <div>{{ "user.Applied" | translate }}</div>
+      </a>
+    </div>
+    <button mat-flat-button class="dropdown" (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+
+    <mat-menu #menu="matMenu"></mat-menu>
+  </div>
+
+  <!-- Mobile nav start -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/user">
+      <mat-icon matSuffix color="">home</mat-icon>{{ "home.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user-profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "user.myProfile" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/saved">
+      <mat-icon matSuffix color="">favorite_border</mat-icon
+      >{{ "user.savedJobs" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/applied">
+      <mat-icon matSuffix color="">done</mat-icon
+      >{{ "user.appliedJobs" | translate }}
+    </button>
+    <button mat-menu-item (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile nav end -->
+</app-header>
+
+<div class="user-page">
+  <section class="container d-flex justify-content-around">
+    <aside class="filter mat-title">
+      <div class="mat-body-2">{{ "user.filterBy" | translate }}</div>
+
+      <form>
+        <div class="filters">
+          <div class="filter-field">
+            <label for="category" class="mat-body-2">{{
+              "user.category" | translate
+            }}</label>
+            <!-- <input
+              class="filter-input"
+              type="text"
+              name="category"
+              placeholder="e.g. Security Guard"
+              [(ngModel)]="filterCategory"
+            /> -->
+
+            <select
+              class="filter-input category"
+              #t
+              (change)="onCategoryChange(t.value)"
+            >
+            <option value="" disabled selected>{{ "company.all" | translate }}</option>
+            <option value="Driver">{{
+              "company.driver" | translate
+            }}</option>
+            <option value="Peon">{{
+              "company.peon" | translate
+            }}</option>
+            <option value="Cook">{{
+              "company.cook" | translate
+            }}</option>
+            <option value="Delivery Boy">{{
+              "company.deliveryBoy" | translate
+            }}</option>
+            <option value="Household Worker">{{
+              "company.household" | translate
+            }}</option>
+            <option value="Repairing Work">{{
+              "company.repairng" | translate
+            }}</option>
+            <option value="Beautician">{{
+              "company.beautician" | translate
+            }}</option>
+            <option value="Security">{{
+              "company.security" | translate
+            }}</option>
+            </select>
+          </div>
+          <div class="filter-field location">
+            <label for="location" class="mat-body-2">{{
+              "user.location" | translate
+            }}</label>
+            <input
+              class="filter-input"
+              type="text"
+              name="location"
+              placeholder="e.g. Bangalore"
+              [(ngModel)]="filterLocation"
+            />
+          </div>
+          <!-- <div class="filter-field location">
+            <label for="location" class="mat-body-2">Location</label>
+            <input
+              class="filter-input"
+              type="text"
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+              name="location"
+              placeholder="e.g. Bangalore"
+              [(ngModel)]="filterLocation"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </div> -->
+        </div>
+        <div class="btn-apply">
+          <button mat-button class="apply button-blue" (click)="onFilter()">
+            {{ "user.Apply" | translate }}
+          </button>
+          <button
+            type="reset"
+            mat-button
+            class="apply button-red"
+            (click)="onReset()"
+          >
+            {{ "user.reset" | translate }}
+          </button>
+        </div>
+      </form>
+    </aside>
+
+    <div class="jobs">
+      <!-- <mat-card class="card mb-3 p-3 head-card">
+        <mat-card-title>{{ "user.allJobs" | translate }}</mat-card-title>
+        <div class="filter-details mt-3 mb-3">
+          <span class="filtr">{{ "user.allCities" | translate }}</span>
+          <span class="filtr">{{ "user.allCategories" | translate }}</span>
+        </div>
+        <div class="filter-exp">
+          <mat-accordion>
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+              <mat-expansion-panel-header>
+                <div>{{ "user.filters" | translate }}</div>
+              </mat-expansion-panel-header>
+              <form>
+                <div class="filters">
+                  <div class="filter-field category">
+                    <label for="category" class="mat-body-2">{{
+                      "user.category" | translate
+                    }}</label>
+                    <input
+                      class="filter-input"
+                      type="text"
+                      name="category"
+                      placeholder="e.g. Security Guard"
+                      [(ngModel)]="filterCategory"
+                    />
+                  </div>
+                  <div class="filter-field location">
+                    <label for="location" class="mat-body-2">{{
+                      "user.location" | translate
+                    }}</label>
+                    <input
+                      class="filter-input"
+                      type="text"
+                      name="location"
+                      placeholder="e.g. Bangalore"
+                      [(ngModel)]="filterLocation"
+                    />
+                  </div>
+                </div>
+                <div class="btn-apply">
+                  <button mat-button class="apply" (click)="onFilter()">
+                    {{ "user.apply" | translate }}
+                  </button>
+                  <button
+                    type="reset"
+                    mat-button
+                    class="apply reset"
+                    (click)="onReset()"
+                  >
+                    {{ "user.reset" | translate }}
+                  </button>
+                </div>
+              </form>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-card> -->
+
+      <div class="filter-exp mb-3">
+        <mat-accordion>
+          <mat-expansion-panel
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <div>{{ "user.filters" | translate }}</div>
+            </mat-expansion-panel-header>
+            <form>
+              <div class="filters">
+                <div class="filter-field category">
+                  <label for="category" class="mat-body-2">{{
+                    "user.category" | translate
+                  }}</label>
+
+                  <select
+                    class="filter-input category"
+                    #c
+                    (change)="onCategoryChange(c.value)"
+                  >
+
+                    <option value="" disabled selected>{{ "company.all" | translate }}</option>
+                    <option value="Driver">{{
+                      "company.driver" | translate
+                    }}</option>
+                    <option value="Peon">{{
+                      "company.peon" | translate
+                    }}</option>
+                    <option value="Cook">{{
+                      "company.cook" | translate
+                    }}</option>
+                    <option value="Delivery Boy">{{
+                      "company.deliveryBoy" | translate
+                    }}</option>
+                    <option value="Household Worker">{{
+                      "company.household" | translate
+                    }}</option>
+                    <option value="Repairing Work">{{
+                      "company.repairng" | translate
+                    }}</option>
+                    <option value="Beautician">{{
+                      "company.beautician" | translate
+                    }}</option>
+                    <option value="Security">{{
+                      "company.security" | translate
+                    }}</option>
+                  </select>
+                </div>
+                <div class="filter-field location">
+                  <label for="location" class="mat-body-2">{{
+                    "user.location" | translate
+                  }}</label>
+                  <input
+                    class="filter-input"
+                    type="text"
+                    name="location"
+                    placeholder="e.g. Bangalore"
+                    [(ngModel)]="filterLocation"
+                  />
+                </div>
+              </div>
+              <div class="btn-apply">
+                <button mat-button class="apply button-blue" (click)="onFilter()">
+                  {{ "user.Apply" | translate }}
+                </button>
+                <button
+                  type="reset"
+                  mat-button
+                  class="apply button-red"
+                  (click)="onReset()"
+                >
+                  {{ "user.reset" | translate }}
+                </button>
+              </div>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <div class="mat-body-2">{{ "user.search" | translate }}</div>
+      <div class="search-job">
+        <input
+          class="search"
+          type="text"
+          name="searchedJobTitle"
+          [(ngModel)]="searchedJobTitle"
+          (ngModelChange)="search()"
+          placeholder="{{ 'user.searchFor' | translate }}"
+        />
+      </div>
+
+      <!-- Not verified  -->
+
+      <!-- <div class="notverifiedcard" *ngIf="!companyDetails.verified"> -->
+      <!-- <div class="alert alert-info" role="alert">
+        <span>
+          <div>
+            1. Please fill your details to start your Verification Process.
+          </div>
+          <div>
+            2. Please wait Our Team will get in touch with you for verification
+            Shortly.
+          </div>
+        </span>
+      </div> -->
+
+      <span class="j-main-heading">{{ "user.latestJobs" | translate }}</span>
+
+      <div *ngIf="searchedJobNotFound || allJobs.length == 0" class="no-job">
+        <p class="mat-h2">{{ "user.jobNotFound" | translate }}</p>
+      </div>
+      <div
+        *ngFor="
+          let job of allJobs
+            | paginate: { itemsPerPage: 5, currentPage: currentPage }
+        "
+      >
+        <mat-card class="post-card">
+          <div class="card-button">
+            <mat-card-title
+              >{{ job.title }}
+              <sup>
+                <span *ngIf="isNew[job.jobId]" class="new">New</span>
+              </sup>
+            </mat-card-title>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>business</mat-icon>
+              <span class="mx-1"> {{ "user.company" | translate }} </span>:
+              <a
+                (click)="onJobPostClick(job.jobId, job.companyName)"
+                class="mx-1"
+                style="cursor: pointer; color: gray; font-weight: 600;"
+              >
+                {{ job.companyName }}
+              </a>
+            </div>
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>reorder</mat-icon>
+              <span class="mx-1"> {{ "user.category" | translate }} </span>:
+              <span class="mx-1"> {{ job.category }} </span>
+            </div>
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>location_on</mat-icon>
+              <span class="mx-1"> {{ "user.location" | translate }} </span>:
+              <span class="mx-1"> {{ job.location }} </span>
+            </div>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>event</mat-icon>
+              <span class="mx-1">
+                {{ "user.postedOn" | translate }} :
+                {{ job.createdate | date }}
+              </span>
+            </div>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <img src="../../../assets/rupee-indian.png" class="mx-1" alt=""/>
+              <span class="mx-1">
+                {{ "user.salaryRange" | translate }} :
+                {{ job.minSalary | currency: "INR":"symbol":".0" }} -
+                {{ job.maxSalary | currency: "INR":"symbol":".0" }}
+                {{ "user.perMonth" | translate }}
+              </span>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-2">
+            <button
+              *ngIf="!(status[job.jobId] == 'Applied')"
+              [disabled]="status[job.jobId] == 'Saved'"
+              class="btn button-blue"
+              (click)="onJobSave(job, 'Saved')"
+            >
+              <!-- {{ saved[job.jobId] }} -->
+              {{ "user." + saved[job.jobId] | translate }}
+            </button>
+            <button
+              [disabled]="status[job.jobId] == 'Applied'"
+              class="btn button-success"
+              (click)="onJobSave(job, 'Applied')"
+            >
+              <!-- {{ applied[job.jobId] }} -->
+              {{ "user." + applied[job.jobId] | translate }}
+            </button>
+          </div>
+        </mat-card>
+      </div>
+      <pagination-controls
+        autoHide="true"
+        (pageChange)="onPageChange($event)"
+      ></pagination-controls>
+
+      <!-- <div class="tabs">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="All Jobs">
+            <div *ngIf="searchedJobNotFound" class="no-job">
+              <p class="mat-h2">Searched job not found</p>
+            </div>
+
+
+            <mat-card class="post-card">
+              <button class="card-button" (click)="onJobPostClick('jobId')">
+                <mat-card-title>Amazon - Amazon </mat-card-title>
+                <mat-card-subtitle class="d-flex align-items-center">
+                  <mat-icon matSuffix>location_on</mat-icon>
+                  Amazon
+                </mat-card-subtitle>
+
+                <div class="exp">
+                  <span class="mat-body-strong">Experience</span>:
+                  <span class="mat-body"> Amazon years</span>
+                </div>
+
+                <div class="field descrption">
+                  <div class="mat-body-strong">Job Description</div>
+                  <div class="mat-body">Amazon </div>
+                </div>
+                <div class="field d-flex justify-content-between">
+                  <div class="ctc">
+                    <span class="mat-body-strong">CTC</span>:
+                    <span class="mat-body">
+                      &#8377;Amazon  LPA</span
+                    >
+                  </div>
+                  <div class="posted">
+                    <span class="mat-body-strong">Posted</span>:
+                    <span class="mat-body"> 4 days ago</span>
+                  </div>
+                </div>
+              </button>
+              <div class="d-flex justify-content-end mt-2">
+                <button>
+                  Save
+                </button>
+              </div>
+            </mat-card>
+
+
+            <div
+              *ngFor="
+                let job of allJobs
+                  | paginate: { itemsPerPage: 5, currentPage: currentPage }
+              "
+            >
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        &#8377;{{ job.minSalary }}-{{ job.maxSalary }} LPA</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+                <div class="d-flex justify-content-end mt-2">
+                  <button
+                    [disabled]="status[job.jobId] != 'Save'"
+                    class="btn btn-primary"
+                    (click)="onJobSave(job, 'Saved')"
+                  >
+                    {{ status[job.jobId] }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+
+            <pagination-controls
+              autoHide="true"
+              responseive="true"
+              (pageChange)="onPageChange($event)"
+            ></pagination-controls>
+          </mat-tab>
+
+          <mat-tab label="Saved Jobs">
+            <div *ngIf="noSavedJob" class="no-job">
+              <p class="mat-h2">You haven't saved any job</p>
+            </div>
+
+            <div *ngFor="let job of savedJobs">
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        {{ job.minSalary }}-{{ job.maxSalary }} lpa</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+                <div class="d-flex justify-content-end mt-2">
+                  <button class="btn btn-danger" (click)="onRemoveJob(job)">
+                    Remove
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+          </mat-tab>
+
+          <mat-tab class="tab" label="Applied Jobs">
+            <div *ngIf="noAppliedJob" class="no-job">
+              <p class="mat-h2">You haven't applied to any job</p>
+            </div>
+
+            <div *ngFor="let job of appliedJobs">
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        {{ job.minSalary }}-{{ job.maxSalary }} lpa</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+              </mat-card>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div> -->
+    </div>
+
+  </section>
+</div>

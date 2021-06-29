@@ -1,0 +1,282 @@
+@import "../../../styles";
+@import "../header/header.component";
+
+.user-page {
+  background-color: $bg-color;
+  // background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+.container {
+  max-width: 900px;
+}
+
+section {
+  padding: 0 18px;
+}
+
+button {
+  color: $primary-black;
+}
+
+.filter {
+  width: 25%;
+}
+
+aside {
+  align-self: flex-start;
+  position: sticky;
+  top: 5rem;
+}
+
+.jobs {
+  width: 70%;
+}
+
+.search-job {
+  margin-bottom: 2rem;
+}
+
+.search {
+  border: 1px solid $border;
+  border-radius: 7px;
+
+  padding: 0.7rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+label {
+  display: block;
+}
+
+.filter-input {
+  background-color: $color-white;
+  border: 1px solid $border;
+  border-radius: 5px;
+  color: $text-color;
+  // display: block;
+  font-size: 15px;
+  line-height: 1px;
+  padding: 0.5rem;
+  // width: 90%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.filter-opt {
+  display: block;
+}
+
+.apply {
+  background-color: $blue;
+  border: 1px solid $border;
+  border-radius: 5px;
+  color: $color-white;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+.reset {
+  background-color: $red-light;
+  color: $red;
+}
+
+// post card
+
+.post-card {
+  background-color: $color-white;
+  border: 0.2px solid $border;
+  border-radius: 10px;
+  margin: 1rem 0;
+  opacity: 0.9;
+  position: relative;
+  text-align: left;
+  top: 0;
+
+  &:hover {
+    background-color: #f0f5fc;
+    border: 1px solid #cccccc;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2), 0 4px $green-medium;
+    opacity: 1;
+    top: -4px;
+    transition: all 0.2s ease-out;
+
+    &::before {
+      transform: scale(2.15);
+    }
+  }
+}
+
+.card-button {
+  background: inherit;
+  border: 0;
+  text-align: left;
+  width: 100%;
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+}
+
+.field {
+  margin-top: 5px;
+}
+
+.btn {
+  color: $color-white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  opacity: 0.93;
+  padding: 0.3rem 1.5rem;
+}
+
+button {
+  &:disabled {
+    background-image: none;
+    background-color: inherit;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    // opacity: .5;
+  }
+}
+
+.no-job {
+  color: $dark-gray;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+mat-card-subtitle {
+  border-bottom: 1px solid $border;
+  padding-bottom: 0.5rem;
+}
+
+pagination-controls {
+  text-align: center;
+}
+
+.job-details {
+  font-size: 16px;
+}
+
+.head-card {
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.filtr {
+  color: $dark-gray;
+  border: 1px solid $border;
+  border-radius: 5px;
+  margin-right: 1rem;
+  padding: 0.3rem 1rem;
+}
+
+.category {
+  width: 85%;
+}
+
+.filter-exp {
+  display: none;
+}
+
+.responsive-nav {
+  display: none;
+}
+
+.active {
+  color: cyan;
+}
+
+.new {
+  background: $red;
+  color: $color-white;
+  font-size: .8rem;
+  margin-left: .23rem;
+  padding: .1rem .3rem;
+}
+// -----------------------------------------------
+// For 0px to 768px
+// -----------------------------------------------
+
+@media only screen and (max-width: 769px) {
+  .user-page {
+    padding: 1rem;
+  }
+
+  section {
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  aside {
+    display: none;
+  }
+
+  .filter-exp {
+    display: block;
+  }
+
+  .filter {
+    background-color: $color-white;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: 1rem;
+    position: static;
+    width: 100%;
+  }
+
+  .filter-field {
+    width: 50%;
+    float: left;
+  }
+
+  .filter-input {
+    width: 90%;
+  }
+
+  .jobs {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .container {
+    max-width: 70vw;
+  }
+
+  // for nav items
+
+  .mid-options {
+    display: none;
+  }
+
+  .responsive-nav {
+    display: block;
+  }
+}
+
+// -----------------------------------------------
+// For 0px to 420px
+// -----------------------------------------------
+
+@media only screen and (max-width: 420px) {
+  .container {
+    max-width: 85vw;
+  }
+
+  .filter-field {
+    float: none;
+    width: 100%;
+  }
+}

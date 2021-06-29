@@ -1,0 +1,87 @@
+@import '../../../styles';
+// @import '../user-landing-page/user-landing-page.component';
+@import '../user-profile/user-profile.component';
+@import '../company-landing-page/company-landing-page.component';
+@import '../banner/banner.component';
+$background: #f1f2f4;
+$border: #d3d3d3;
+
+.user-page {
+  background-color: $background;
+  padding: .4rem 2rem 2rem;
+}
+
+section {
+  padding: 0 18px;
+}
+
+.bread {
+  margin: 0 5rem;
+}
+
+// Post card
+
+.job-card {
+  margin: 0 5rem 1rem;
+  padding: 2.2rem;
+}
+
+.job-title {
+  color: $dark;
+}
+
+.btn-save {
+  background-color: $color-white;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  margin-right: 1rem;
+}
+
+
+.flex2 {
+  align-self: center;
+}
+
+.mat-body-2 {
+  margin: 1rem 0 .3rem;
+}
+
+.fields {
+  margin-top: 1rem;
+}
+
+.mat-chip {
+  background-color: $background;
+  font-weight: normal ;
+}
+
+.desc {
+  margin-bottom: 1rem;
+}
+
+.cpp {
+  border-radius: 20%;
+  height: 100px;
+  width: 80%;
+}
+
+
+
+// -----------------------------------------------
+// For 0px to 768px
+// -----------------------------------------------
+
+@media only screen and (max-width: 768px) {
+
+  .job-card {
+    margin: 0 0 2rem;
+  }
+
+  .post-card {
+    margin: .5rem 0;
+  }
+
+  .main_title {
+    margin-top: 1rem;
+  }
+}

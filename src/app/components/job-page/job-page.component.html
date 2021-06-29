@@ -1,0 +1,147 @@
+
+<app-header class="head">
+  <div nav-right class="mid-options">
+    <div class="badges">
+      <a class="nav-icon" routerLink="/user">
+        <i class="fas fa-home"></i>
+        <div>{{ "home.home" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user-profile">
+        <i class="far fa-id-card"></i>
+        <div>{{ "user.Profile" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/saved">
+        <i class="fas fa-heart"></i>
+        <div>{{ "user.Saved" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/applied">
+        <i class="fas fa-check"></i>
+        <div>{{ "user.Applied" | translate }}</div>
+      </a>
+    </div>
+    <button mat-flat-button class="dropdown" (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+
+    <mat-menu #menu="matMenu"> </mat-menu>
+  </div>
+
+  <!-- Mobile nav start -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/user">
+      <mat-icon matSuffix color="">home</mat-icon>{{ "home.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user-profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "user.myProfile" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/saved">
+      <mat-icon matSuffix color="">favorite_border</mat-icon
+      >{{ "user.savedJobs" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/applied">
+      <mat-icon matSuffix color="">done</mat-icon
+      >{{ "user.appliedJobs" | translate }}
+    </button>
+    <button mat-menu-item (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile nav end -->
+</app-header>
+
+<div class="user-page">
+  <section class="container">
+
+     <!-- banner starts -->
+     <div class="main_container mb-3">
+      <div class="main_title">
+        <img src="../../../assets/hello.svg" alt="">
+        <div class="main_greeting">
+          <h1 class="name">
+            {{curCompany.companyName}}
+            <sup *ngIf="  curCompany.verified">
+              <mat-icon style="color: #069bf1;">
+                verified
+              </mat-icon>
+            </sup>
+          </h1>
+          <p>{{curCompany.moto}}</p>
+          <p style="font-size: 14px; margin-top: -7px;">
+            <!-- <mat-icon matSuffix>location_on</mat-icon> -->
+            {{curCompany.city}}, {{curCompany.country}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- banner end -->
+
+    <span class="j-main-heading">Jobs posted by {{curCompany.companyName}}</span>
+
+    <div class="row">
+      <div class="col-md-6" *ngFor="let job of companyJobs">
+        <mat-card class="card post-card">
+          <div class="d-flex justify-content-between">
+            <mat-card-title class="job-title">{{ job.title }}
+              <sup>
+                <span *ngIf="isNew[job.jobId]" class="new">New</span>
+              </sup>
+            </mat-card-title>
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>reorder</mat-icon>
+            <span class="mx-1"> {{ "user.category" | translate }} </span>:
+            <span class="mx-1"> {{ job.category }} </span>
+          </div>
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>location_on</mat-icon>
+            <span class="mx-1"> {{ "user.location" | translate }} </span>:
+            <span class="mx-1"> {{ job.location }} </span>
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>event</mat-icon>
+            <span class="mx-1">
+              {{ "user.postedOn" | translate }} :
+              {{ job.createdate | date }}
+            </span>
+          </div>
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <mat-icon matSuffix>event</mat-icon>
+            <span class="mx-1"> {{ "company.lastDate" | translate }} : {{ job.lastDate | date }} </span>
+          </div>
+
+          <div class="job-details mb-1 icon d-flex align-items-center">
+            <img src="../../../assets/rupee-indian.png" class="mx-1" alt="" />
+            <span class="mx-1">
+              {{ "user.salaryRange" | translate }} :
+              {{ job.minSalary | currency: "INR":"symbol":".0" }} -
+              {{ job.maxSalary | currency: "INR":"symbol":".0" }}
+              {{ "user.perMonth" | translate }}
+            </span>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <button
+              *ngIf="!(status[job.jobId] == 'Applied')"
+              [disabled]="status[job.jobId] == 'Saved'"
+              class="btn button-blue"
+              (click)="onJobSave(job, 'Saved')"
+            >
+              {{ "user." + saved[job.jobId] | translate }}
+            </button>
+            <button
+              [disabled]="status[job.jobId] == 'Applied'"
+              class="btn button-success"
+              (click)="onJobSave(job, 'Applied')"
+            >
+              {{ "user." + applied[job.jobId] | translate }}
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,248 @@
+@import "../../../styles";
+
+
+.container {
+  max-width: 70%;
+}
+
+.addjob {
+  color: $secondary;
+  border-radius: 50px;
+  height: 40px;
+  margin-top: 0.5rem;
+  padding: 0 1.2rem;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+
+.icons{
+  display: flex;
+  div button{
+    color: white;
+    mat-icon{
+      color: white;
+    }
+  }
+
+}
+main {
+  background-color: $bg-color;
+  padding: 2rem 0;
+  min-height: 80vh;
+}
+
+.btn {
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  opacity: 0.93;
+  padding: 0.3rem 1.5rem;
+}
+
+.post-card {
+  background-color: $color-white;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.card-button {
+  border: 0;
+  box-shadow: $shadow;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+}
+//search
+.search-job {
+  margin: 1rem 0;
+}
+.search {
+  border: 1px solid $border;
+  border-radius: 7px;
+  padding: 0.7rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+pagination-controls {
+  text-align: center;
+}
+
+.no-job {
+  color: $dark-gray;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+$baseColor: #345db6;
+$borderRadius: 10px;
+$imageBig: 100px;
+$imageSmall: 60px;
+$padding: 10px;
+
+body {
+   background-color: lighten($baseColor, 30%);
+   * { box-sizing: border-box; }
+}
+
+.no-header {
+
+  // background-color: rgb(233, 139, 76);
+  background-image:  linear-gradient(to left, #4481eb 0%, #04befe 100%);
+  color: white;
+  font-size: 1.5em;
+  padding: 2rem;
+  margin: 0.87rem 0;
+  text-align: center;
+  border-radius: 10px;
+  // border:2px solid rgb(214, 113, 113);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+
+  &:hover {
+    // background-color: #f0f5fc;
+    // border: 1px solid #cccccc;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15), 0 4px $green-medium;
+    opacity: 1;
+    transform: scale3d(1.006, 1.006, 1);
+    &::before {
+      transform: scale3d(1.006, 1.006, 1);
+    }
+  }
+}
+
+.header {
+
+  //  background-color: darken($baseColor, 5%);
+   background-image:  linear-gradient(to left, #4481eb 0%, #04befe 100%);
+   color: white;
+   font-size: 1.2em;
+   padding: 1rem;
+   margin: 0.87rem 0;
+   margin-bottom: 0px;
+   text-align: center;
+   text-transform: uppercase;
+   border-radius: 10px;
+   border-bottom-left-radius:0px;
+   border-bottom-right-radius:0px;
+   box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+   &:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15), 0 4px $green-medium;
+    opacity: 1;
+    // transform: scale3d(1.006, 1.006, 1);
+    // &::before {
+    //   transform: scale3d(1.006, 1.006, 1);
+    // }
+  }
+
+}
+
+
+
+.table-users {
+   border: 1px solid darken($baseColor, 5%);
+   border-radius: $borderRadius;
+   box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+   margin-top:0px;
+   margin-bottom: 2rem;
+   margin:0px;
+   overflow: hidden;
+   border-top-left-radius:0px;
+   border-top-right-radius:0px;
+  //  width: 800px;
+
+  &:hover {
+    // background-color: #f0f5fc;
+    // border: 1px solid #cccccc;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15), 0 4px $green-medium;
+    opacity: 1;
+    // transform: scale3d(1.006, 1.006, 1);
+    // &::before {
+    //   transform: scale3d(1.006, 1.006, 1);
+    // }
+  }
+}
+
+
+table {
+   width: 100%;
+
+   td, th {
+      color: darken($baseColor, 10%);
+      padding: $padding;
+   }
+
+   td {
+      text-align: center;
+      vertical-align: middle;
+
+      &:last-child {
+         font-size: 0.95em;
+         line-height: 1.4;
+         text-align: left;
+      }
+   }
+
+   th {
+      background-color:lighten($baseColor, 50%);
+      font-weight: 300;
+   }
+
+   tr {
+      &:nth-child(2n) { background-color: white; }
+      &:nth-child(2n+1) { background-color: lighten($baseColor, 55%) }
+   }
+}
+.responsive-nav{
+  display: none;
+}
+.active{
+  color: cyan;
+}
+.nav-middle li {
+  font-size: 1rem;
+  a.active{
+    color: cyan;
+  }
+  a:hover{
+    color: cyan;
+  }
+}
+@media only screen and (max-width:768px){
+  .responsive-nav{
+    display:block;
+  }
+  .lg-nav-items{
+    display: none;
+  }
+  .closeHiring{
+    display: none;
+  }
+}
+@media screen  and (max-width:480px){
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .header{
+    display: block;
+  }
+
+}
+
+.ngx-pagination .current {
+  pjobing: 0.1875rem 0.625rem;
+  background: #2143e8;
+  color: #fefefe;
+  cursor: default;
+}
+

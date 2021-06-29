@@ -1,0 +1,240 @@
+<app-header>
+  <!-- This is only visible on mobile screen -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/">
+      <mat-icon matSuffix color="">home</mat-icon>Home
+    </button>
+    <button mat-menu-item routerLink="/company/job/add">
+      <mat-icon matSuffix color="">add_circle</mat-icon>Add Job
+    </button>
+    <button mat-menu-item routerLink="/company/profile">
+      <mat-icon matSuffix color="">person</mat-icon>My Profile
+    </button>
+
+    <button mat-menu-item (click)="onCompanyLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon>Logout
+    </button>
+    <button mat-menu-item *ngIf="hiring">
+      <mat-icon
+        class="nav-icon active"
+        matTooltip="Close Opening"
+        (click)="closeJob()"
+      >
+        add_task
+      </mat-icon>
+      Close hiring
+    </button>
+    <button mat-menu-item class="addjob-print">
+      <mat-icon
+        matSuffix
+        style="transform: scale(1.3); padding-top: 0.8px"
+        matTooltip="Download Applicants List"
+        (click)="downloadFile()"
+        >download_for_offline</mat-icon
+      >Download Data
+    </button>
+  </div>
+  <!-- Mobile screen navbar end -->
+
+  <div class="closeHiring">
+    <button mat-flat-button class="addjob" *ngIf="hiring">
+      <mat-icon
+        class="nav-icon active"
+        matTooltip="Close Opening"
+        (click)="closeJob()"
+      >
+        add_task
+      </mat-icon>
+    </button>
+    <button mat-flat-button class="addjob-print">
+      <mat-icon
+        matSuffix
+        style="transform: scale(1.3)"
+        matTooltip="Download Applicants List"
+        (click)="downloadFile()"
+        >download_for_offline</mat-icon
+      >
+    </button>
+  </div>
+  <div nav-right class="lg-nav-items nav-middle">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link">{{
+        "company.home" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/company/profile/" class="nav-link">{{
+        "company.myAcc" | translate
+      }}</a>
+    </li>
+    <li class="nav-item">
+      <a href="" (click)="onCompanyLogout()" class="nav-link">{{
+        "company.logout" | translate
+      }}</a>
+    </li>
+    <mat-menu #menu="matMenu"></mat-menu>
+  </div>
+</app-header>
+
+<main>
+  <div class="container">
+    <app-banner></app-banner>
+    <!-- start -->
+
+    <div class="no-header" *ngIf="!allApplicants.length">
+      <h1>{{ "company.noAppl" | translate }}</h1>
+      <h4>{{ "company.totalAppli" | translate }} : 0</h4>
+    </div>
+
+    <div
+      class="header d-md-flex justify-content-between align-items-center flex-2"
+      *ngIf="allApplicants.length"
+    >
+      <div style="font-weight: 700; font-size: 16px; color: white">
+        {{ "company.appliFor" | translate }}
+        <span style="color: black">{{ allApplicants[0].jobPost.title }}</span>
+      </div>
+      <div class="icons">
+        <div>
+          <button mat-menu-item  (click)="closeJob()" *ngIf="hiring">
+            <mat-icon
+              class="nav-icon active"
+              matTooltip="Close Opening"
+             
+            >
+              add_task
+            </mat-icon>
+            Close Hiring
+          </button>
+        </div>
+        <div>
+          <button
+            mat-menu-item
+            (click)="downloadFile()"
+          >
+            <mat-icon
+              matSuffix
+              matTooltip="Download Applicants List"
+              
+              >download_for_offline
+            </mat-icon>
+            Download
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      style="overflow-x: auto"
+      class="table-users"
+      *ngIf="allApplicants.length"
+    >
+      <table cellspacing="0">
+        <tr>
+          <th style="text-align: center">{{ "company.sn" | translate }}</th>
+          <th style="text-align: center">{{ "company.name" | translate }}</th>
+          <th style="text-align: center">{{ "company.phone" | translate }}</th>
+          <th style="text-align: center">{{ "company.dob" | translate }}</th>
+          <th style="text-align: center">{{ "company.gender" | translate }}</th>
+          <th style="text-align: center">{{ "company.status" | translate }}</th>
+        </tr>
+
+        <tr
+          *ngFor="
+            let applicant of allApplicants
+              | paginate: { itemsPerPage: 15, currentPage: currentPage };
+            index as i
+          "
+        >
+          <td>
+            <!-- <mat-icon matSuffix style="transform: scale(1.5)"
+              >account_circle</mat-icon
+            > -->
+            <h3>{{ i + 1 }}</h3>
+            <!-- <img src="{{applicant.seekerSignup.profileimage}}" alt="profileimage"> -->
+          </td>
+          <td style="text-align: center">
+            {{ applicant.seekerSignup.name | titlecase }}
+          </td>
+          <td style="text-align: center">
+            {{ applicant.seekerSignup.phonenumber }}
+          </td>
+          <td>{{ applicant.seekerSignup.dob | date }}</td>
+          <td>{{ applicant.seekerSignup.gender | titlecase }}</td>
+          <td style="text-align: center">
+            <button
+              style="
+                width: 100px;
+                background-color: #3ea0ce;
+                color: rgb(255, 255, 255);
+              "
+              mat-raised-button
+              [disabled]="true"
+              *ngIf="
+                applicant.applicationstatus == 'hired' &&
+                applicant.jobPost.closehirinig == 'Yes'
+              "
+            >
+              {{ "company.hired" | translate }}
+            </button>
+            <button
+              style="
+                width: 100px;
+                background-color: #e05735;
+                color: rgb(233, 233, 233);
+              "
+              mat-raised-button
+              [disabled]="true"
+              *ngIf="
+                applicant.applicationstatus == 'reject' &&
+                applicant.jobPost.closehirinig == 'Yes'
+              "
+            >
+              {{ "company.rejected" | translate }}
+            </button>
+
+            <button
+              (click)="onUpdate(applicant)"
+              style="width: 100px; background-color: #03bb6d; color: white"
+              mat-raised-button
+              *ngIf="
+                applicant.applicationstatus == 'hired' &&
+                applicant.jobPost.closehirinig != 'Yes'
+              "
+            >
+              {{ "company.hired" | translate }}
+            </button>
+            <button
+              (click)="onUpdate(applicant)"
+              style="width: 100px; background-color: #fedbd4; color: red"
+              mat-raised-button
+              *ngIf="
+                applicant.applicationstatus == 'reject' &&
+                applicant.jobPost.closehirinig != 'Yes'
+              "
+            >
+              {{ "company.rejected" | translate }}
+            </button>
+            <button
+              (click)="onUpdate(applicant)"
+              style="width: 100px; background-color: #fc0; color: white"
+              mat-raised-button
+              *ngIf="
+                applicant.applicationstatus == 'InProcess' &&
+                applicant.jobPost.closehirinig != 'Yes'
+              "
+            >
+              {{ "company.process" | translate }}
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <pagination-controls
+      *ngIf="allApplicants.length"
+      autoHide="true"
+      responsive="true"
+      (pageChange)="currentPage = $event"
+    >
+    </pagination-controls>
+  </div>
+</main>

@@ -1,0 +1,84 @@
+
+<app-header>
+  <div nav-right>
+  <li class="nav-item lg-screen d-flex justify-content-between mt-2">
+    <a class="nav-link lin" routerLink="/login"
+      ><button mat-raised-button class="button-blue px-3 mb-2">
+        {{ "home.login" | translate }}
+      </button></a
+    >
+    <a class="nav-link" routerLink="./signup"
+      ><button mat-button class="button-success px-3">
+        {{ "home.createAccount" | translate }}
+      </button></a
+    >
+  </li>
+  </div>
+</app-header>
+<section class="hero">
+  <div class="container">
+    <figure><img src="../../../assets/hero-banner.png" /></figure>
+    <div class="jj-content">
+      <h1>{{ "home.naukriMatlab" | translate }} <span style="color:#257beb">A</span>pna <span style="color:#257beb">R</span>ozgaar</h1>
+      <p>{{ "home.hire" | translate }}</p>
+      <div class="home-new-filled d-flex">
+        <div class="home-filled-left">
+          <a class="button button-lg button-success" routerLink="/login">{{
+            "home.postNewJob" | translate
+          }}</a>
+          <p class="no-credit-text">{{ "home.hireLocal" | translate }}</p>
+        </div>
+        <div class="home-filled-left">
+          <a
+            class="button button-lg button-blue"
+            href=""
+            title="Search Jobs"
+            alt="Search Jobs"
+            routerLink="/login"
+            >{{ "home.searchJobs" | translate }}</a
+          >
+          <p class="no-credit-text">{{ "home.easyFast" | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="midcounter">
+  <section class="section-one">
+    <span>{{ "home.clients" | translate }}</span>
+    <figure>
+      <img src="../../../assets/client-logo.svg" />
+      <img src="../../../assets/mobile-client-logo.svg" class="mobile-m" />
+    </figure>
+  </section>
+</section>
+<section class="py-4 founder">
+  <h1 class="text-center"><span style="color: #49dbdb">The</span > Founders <span style="color: #49dbdb">& </span>CEO</h1>
+  <div class="container text-center">
+    <mat-card class="inner-container">
+      <ngx-slick-carousel
+        class="carousel"
+        #slickModal="slick-carousel"
+        [config]="slideConfig"
+      >
+        <div
+          ngxSlickItem
+          *ngFor="let founder of Founders"
+          class="slide d-flex flex-column align-items-center items"
+        >
+          <img
+            src="{{ founder.img }}"
+            alt="image"
+            width="120px"
+            height="120px"
+            class="mb-4 rounded-circle"
+          />
+          <h2 style="color: darkcyan">{{ founder.role }}</h2>
+          <h4 class="text-center para">{{ founder.description }}</h4>
+          <h4 style="color: gray">- {{ founder.name }}</h4>
+        </div>
+      </ngx-slick-carousel>
+    </mat-card>
+  </div>
+</section>
+<app-footer></app-footer>

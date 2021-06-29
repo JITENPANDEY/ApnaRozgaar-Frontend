@@ -1,0 +1,11 @@
+@import '../../../styles';
+@import '../header/header.component';
+@import '../user-landing-page/user-landing-page.component';
+
+.applied-status {
+  // padding: 1rem;
+  border-radius: 5px;
+  color: $color-white;
+  cursor: pointer;
+}
+

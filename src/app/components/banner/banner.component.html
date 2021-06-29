@@ -1,0 +1,16 @@
+<div class="main_container">
+  <div class="main_title">
+    <img src="../../../assets/hello.svg" alt="">
+    <div class="main_greeting">
+      <h1 class="name">
+        {{ companyDetails.companyName }}
+        <sup *ngIf="  companyDetails.verified">
+          <mat-icon style="color: #069bf1;">
+            verified
+          </mat-icon>
+        </sup>
+      </h1>
+      <p>Welcome to your admin dashboard</p>
+    </div>
+  </div>
+</div>

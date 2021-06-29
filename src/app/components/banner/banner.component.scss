@@ -1,0 +1,42 @@
+@import "../../../styles";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+.main_container{
+  font-family: "Lato", sans-serif;
+}
+.main_title{
+  display: flex;
+  align-items: center;
+  img {
+    max-height: 150px;
+    object-fit: contain;
+    margin-right: 20px;
+  }
+}
+.main_greeting > h1{
+  font-size: 30px;
+  color: #2e4a66;
+  margin-bottom: 5px;
+}
+
+.main_greeting > p {
+  font-size: 18px;
+  font-weight: 700;
+  color: #a5aaad;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    justify-content: center;
+    h1.name {
+      font-size: 2.2rem;
+    }
+  }
+  img {
+    display: none;
+  }
+}
+@media screen and (max-width: 425px) {
+  // .card{
+  //  display: none;
+  // }
+}

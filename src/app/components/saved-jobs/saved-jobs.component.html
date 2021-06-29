@@ -1,0 +1,341 @@
+
+<app-header class="head">
+  <div nav-right class="mid-options">
+    <div class="badges">
+      <a class="nav-icon" routerLink="/user">
+        <i class="fas fa-home"></i>
+        <div>{{ "home.home" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user-profile">
+        <i class="far fa-id-card"></i>
+        <div>{{ "user.Profile" | translate }}</div>
+      </a>
+      <a class="nav-icon active" routerLink="/user/job/saved">
+        <i class="fas fa-heart"></i>
+        <div>{{ "user.Saved" | translate }}</div>
+      </a>
+      <a class="nav-icon" routerLink="/user/job/applied">
+        <i class="fas fa-check"></i>
+        <div>{{ "user.Applied" | translate }}</div>
+      </a>
+    </div>
+    <button mat-flat-button class="dropdown" (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+
+    <mat-menu #menu="matMenu"> </mat-menu>
+  </div>
+
+  <!-- Mobile nav start -->
+  <div nav-middle class="responsive-nav">
+    <button mat-menu-item routerLink="/user">
+      <mat-icon matSuffix color="">home</mat-icon>{{ "home.home" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user-profile">
+      <mat-icon matSuffix color="">person</mat-icon
+      >{{ "user.myProfile" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/saved">
+      <mat-icon matSuffix color="">favorite_border</mat-icon
+      >{{ "user.savedJobs" | translate }}
+    </button>
+    <button mat-menu-item routerLink="/user/job/applied">
+      <mat-icon matSuffix color="">done</mat-icon
+      >{{ "user.appliedJobs" | translate }}
+    </button>
+    <button mat-menu-item (click)="onUserLogout()">
+      <mat-icon matSuffix color="">logout</mat-icon
+      >{{ "home.logout" | translate }}
+    </button>
+  </div>
+  <!-- Mobile nav end -->
+</app-header>
+<div class="user-page">
+  <section class="container d-flex justify-content-around">
+    <div class="jobs">
+      <mat-card class="card mb-3 pt-10 head-card">
+        <mat-card-title>{{ "user.savedJobs" | translate }}</mat-card-title>
+        <div class="filter-details mt-3">
+          {{ "user.savedInfo" | translate }}
+        </div>
+      </mat-card>
+
+      <span class="j-main-heading">{{ "user.savedJobs" | translate }}</span>
+      <div *ngIf="noSavedJob" class="no-job">
+        <p class="mat-h2">{{ "user.jobNotFound" | translate }}</p>
+      </div>
+      <div
+        *ngFor="
+          let job of savedJobs
+            | paginate: { itemsPerPage: 5, currentPage: currentPage }
+        "
+      >
+        <mat-card class="post-card">
+            <button class="card-button" style="cursor:auto">
+              <mat-card-title
+              >{{ job.title }}
+              <sup>
+                <span *ngIf="isNew[job.jobId]" class="new">New</span>
+              </sup>
+            </mat-card-title>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>business</mat-icon>
+              <span class="mx-1"> {{ "user.company" | translate }} </span>:
+              <a
+                (click)="onJobPostClick(job.jobId, job.companyName)"
+                class="mx-1"
+                style="cursor: pointer; color: gray; font-weight: 600;"
+              >
+                {{ job.companyName }}
+              </a>
+            </div>
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>reorder</mat-icon>
+              <span class="mx-1"> {{ "user.category" | translate }} </span>:
+              <span class="mx-1"> {{ job.category }} </span>
+            </div>
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>location_on</mat-icon>
+              <span class="mx-1"> {{ "user.location" | translate }} </span>:
+              <span class="mx-1"> {{ job.location }} </span>
+            </div>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <mat-icon matSuffix>event</mat-icon>
+              <span class="mx-1">
+                {{ "user.postedOn" | translate }} :
+                {{ job.createdate | date }}
+              </span>
+            </div>
+
+            <div class="job-details mb-1 icon d-flex align-items-center">
+              <img src="../../../assets/rupee-indian.png" class="mx-1" alt="" />
+              <span class="mx-1">
+                {{ "user.salaryRange" | translate }} : {{ job.minSalary | currency: "INR":"symbol":".0" }} - {{
+                  job.maxSalary | currency: "INR":"symbol":".0"
+                }}
+                {{"user.perMonth" | translate}}
+              </span>
+            </div>
+          </button>
+          <div class="d-flex justify-content-end mt-2">
+            <button class="btn button-red" (click)="onRemoveJob(job)">
+              {{ "user.remove" | translate }}
+            </button>
+            <button class="btn button-blue" (click)="onJobSave(job, 'Applied')">
+              {{ "user.Apply" | translate }}
+            </button>
+          </div>
+        </mat-card>
+      </div>
+      <pagination-controls
+        autoHide="true"
+        (pageChange)="onPageChange($event)"
+      ></pagination-controls>
+
+      <!-- <div class="tabs">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="All Jobs">
+            <div *ngIf="searchedJobNotFound" class="no-job">
+              <p class="mat-h2">Searched job not found</p>
+            </div>
+
+
+            <mat-card class="post-card">
+              <button class="card-button" (click)="onJobPostClick('jobId')">
+                <mat-card-title>Amazon - Amazon </mat-card-title>
+                <mat-card-subtitle class="d-flex align-items-center">
+                  <mat-icon matSuffix>location_on</mat-icon>
+                  Amazon
+                </mat-card-subtitle>
+
+                <div class="exp">
+                  <span class="mat-body-strong">Experience</span>:
+                  <span class="mat-body"> Amazon years</span>
+                </div>
+
+                <div class="field descrption">
+                  <div class="mat-body-strong">Job Description</div>
+                  <div class="mat-body">Amazon </div>
+                </div>
+                <div class="field d-flex justify-content-between">
+                  <div class="ctc">
+                    <span class="mat-body-strong">CTC</span>:
+                    <span class="mat-body">
+                      &#8377;Amazon  LPA</span
+                    >
+                  </div>
+                  <div class="posted">
+                    <span class="mat-body-strong">Posted</span>:
+                    <span class="mat-body"> 4 days ago</span>
+                  </div>
+                </div>
+              </button>
+              <div class="d-flex justify-content-end mt-2">
+                <button>
+                  Save
+                </button>
+              </div>
+            </mat-card>
+
+
+            <div
+              *ngFor="
+                let job of allJobs
+                  | paginate: { itemsPerPage: 5, currentPage: currentPage }
+              "
+            >
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        &#8377;{{ job.minSalary }}-{{ job.maxSalary }} LPA</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+                <div class="d-flex justify-content-end mt-2">
+                  <button
+                    [disabled]="status[job.jobId] != 'Save'"
+                    class="btn btn-primary"
+                    (click)="onJobSave(job, 'Saved')"
+                  >
+                    {{ status[job.jobId] }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+
+            <pagination-controls
+              autoHide="true"
+              responseive="true"
+              (pageChange)="onPageChange($event)"
+            ></pagination-controls>
+          </mat-tab>
+
+          <mat-tab label="Saved Jobs">
+            <div *ngIf="noSavedJob" class="no-job">
+              <p class="mat-h2">You haven't saved any job</p>
+            </div>
+
+            <div *ngFor="let job of savedJobs">
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        {{ job.minSalary }}-{{ job.maxSalary }} lpa</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+                <div class="d-flex justify-content-end mt-2">
+                  <button class="btn btn-danger" (click)="onRemoveJob(job)">
+                    Remove
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+          </mat-tab>
+
+          <mat-tab class="tab" label="Applied Jobs">
+            <div *ngIf="noAppliedJob" class="no-job">
+              <p class="mat-h2">You haven't applied to any job</p>
+            </div>
+
+            <div *ngFor="let job of appliedJobs">
+              <mat-card class="post-card">
+                <button class="card-button" (click)="onJobPostClick(job.jobId)">
+                  <mat-card-title
+                    >{{ job.title }} - {{ job.companyName }}</mat-card-title
+                  >
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <mat-icon matSuffix>location_on</mat-icon>
+                    {{ job.location }}
+                  </mat-card-subtitle>
+
+                  <div class="exp">
+                    <span class="mat-body-strong">Experience</span>:
+                    <span class="mat-body"> {{ job.experience }} years</span>
+                  </div>
+
+                  <div class="field descrption">
+                    <div class="mat-body-strong">Job Description</div>
+                    <div class="mat-body">
+                      {{ (job.description | slice: 0:300) + "..." }}
+                    </div>
+                  </div>
+
+                  <div class="field d-flex justify-content-between">
+                    <div class="ctc">
+                      <span class="mat-body-strong">CTC</span>:
+                      <span class="mat-body">
+                        {{ job.minSalary }}-{{ job.maxSalary }} lpa</span
+                      >
+                    </div>
+                    <div class="posted">
+                      <span class="mat-body-strong">Posted</span>:
+                      <span class="mat-body"> 4 days ago</span>
+                    </div>
+                  </div>
+                </button>
+              </mat-card>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div> -->
+    </div>
+  </section>
+</div>

@@ -1,0 +1,77 @@
+@import "./variables";
+@import "./utility";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "~angular-notifier/styles";
+body,
+html {
+  box-sizing: border-box;
+  // font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+//google translater
+.translated-ltr {
+  margin-top: -40px;
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-banner-frame {
+  display: none !important;
+  margin-top: -20px;
+}
+.spinner:before {
+  animation: spinner 0.8s linear infinite;
+  border: 2px solid $color-white;
+  border-radius: 50%;
+  border-top-color: $dark;
+  box-sizing: border-box;
+  content: "";
+  height: 20px;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  position: absolute;
+  top: 50%;
+  width: 20px;
+}
+.mat-tab-label {
+  color: black;
+  font-weight: bold;
+}
+.mat-tab-body-content {
+  color: $blue;
+  overflow: hidden !important;
+}
+.mat-button-faded {
+  opacity: 0.8;
+}
+
+.icon {
+  color: #929292;
+}
+//radio button
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  color: rgb(66, 134, 244);
+  background-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgb(255, 37, 37, 0.26);
+}

@@ -1,0 +1,148 @@
+@import "./variables";
+.btn {
+  border: none;
+}
+.button {
+    margin-right: 0px;
+    padding: 0 15px;
+    // float: right;
+    // margin-left: 10px;
+}
+.btn-basic {
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.93;
+    padding: 0.3rem 1.5rem;
+    border: 0;
+    transition: all 0.2s ease;
+}
+.button-yellow {
+  background-image: linear-gradient(to left, #fc0 0%, rgb(248, 215, 80));
+  &:hover {
+    background-image: linear-gradient(to left, #fc0 0%, rgb(248, 215, 80));
+  }
+}
+.button-red {
+  background-image: linear-gradient(to left, red 0%, rgb(243, 86, 86) 100%);
+  &:hover {
+    background-image: linear-gradient(to right, red 0%, rgb(243, 86, 86) 100%);
+  }
+}
+.button-blue {
+    background-image: linear-gradient(to left, #4481eb 0%, #04befe 100%);
+    color: #ffffff;
+    &:focus {
+        text-decoration: none;
+        background: #0256d9;
+        color: #ffffff;
+    }
+    &:hover {
+        text-decoration: none;
+        background-image: linear-gradient(to right, #4481eb 0%, #04befe 100%);
+        color: #ffffff;
+    }
+}
+.button-success {
+    background-color: #63d471;
+    background-image: linear-gradient(to right, #74d87f 0%, #25ac58 74%);
+    color: $color-white;
+    &:focus {
+        text-decoration: none;
+        background: #0256d9;
+        color: #ffffff;
+    }
+    &:hover {
+        text-decoration: none;
+        background-image: linear-gradient(to left, #74d87f 0%, #25ac58 74%);
+        color: #ffffff;
+    }
+}
+.button-update {
+    color: $color-white;
+    background-color: $blue-dark;
+    opacity: 1;
+    &:hover {
+        opacity: 1;
+    }
+}
+.button-danger {
+    background:$red-border;
+    color: white;
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+.j-main-heading {
+    width: auto;
+    background: $yellow;
+    color: $grey-900;
+    height: 32px;
+    line-height: 32px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    margin: 15px 0 0px 0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.dropdown {
+  // background-color: $bg-color2;
+  // color: $blue;
+  background-image: linear-gradient(to left, #4481eb 0%, #04befe 100%);
+  color: $color-white;
+  padding: 0 .5rem;
+}
+.responsive-nav button{
+    color: #ffffff;
+    mat-icon{
+        color: white;
+    }
+}
+mat-divider {
+    border-top-color: white;
+    opacity:0.5;
+}
+
+.text-primary-p {
+    color: #a5aaad;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .text-primary-2 {
+    color: #2e4a66;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .text-title {
+    color: #2e4a66;
+  }
+
+  .text-lightblue {
+    color: #469cac;
+  }
+
+  .text-red {
+    color: #cc3d38;
+  }
+
+  .text-yellow {
+    color: #a98921;
+  }
+
+  .text-green {
+    color: #3b9668;
+  }
+  .text-white {
+    color: #fff;
+  }
+  .lg-nav-items{
+    display:flex;
+    align-items: center;
+  }

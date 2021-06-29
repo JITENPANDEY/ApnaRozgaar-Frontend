@@ -1,0 +1,481 @@
+<div>
+  <app-header>
+    <div nav-right>
+      <li class="nav-item lg-screen d-flex justify-content-between mt-2">
+        <a class="nav-link lin" routerLink="/login"
+          ><button mat-raised-button class="button-blue px-3 mb-2">
+            {{ "home.login" | translate }}
+          </button></a
+        >
+        <a class="nav-link" routerLink="./signup"
+          ><button mat-raised-button class="button-success px-3">
+            {{ "home.createAccount" | translate }}
+          </button></a
+        >
+      </li>
+    </div>
+  </app-header>
+</div>
+<main>
+<div class="main d-flex justify-content-around container">
+  <div class="center-content">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Sign Up Here</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-tab-group animationDuration="0ms">
+          <form
+            #userform="ngForm"
+            [formGroup]="userSignUpForm"
+            class="form-container"
+          >
+            <mat-tab label="FOR USER">
+              <div *ngIf="!Uvalid" class="card-full-width invalid">
+                {{ Uerrormsg }}
+              </div>
+              <div *ngIf="UIsSuccess" class="card-full-width valid">
+                {{ signUpResponse }}
+              </div>
+              <mat-form-field class="card-full-width">
+                <mat-label>Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Your name"
+                  value=""
+                  formControlName="userName"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('userName').invalid &&
+                    userSignUpForm.get('userName').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('userName').errors?.required"
+                    >Username is required</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('userName').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>person</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  placeholder="Email"
+                  value=""
+                  formControlName="userEmail"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('userEmail').invalid &&
+                    userSignUpForm.get('userEmail').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      userSignUpForm.get('userEmail').dirty &&
+                      !userSignUpForm.get('userEmail').errors?.required
+                    "
+                    >Please enter a valid email address</mat-error
+                  >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('userEmail').errors?.required"
+                    >Email is required</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('userEmail').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Phone </mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Phone"
+                  value=""
+                  formControlName="phone"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('phone').invalid &&
+                    userSignUpForm.get('phone').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('phone').errors?.required"
+                    >Phone number is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      userSignUpForm.get('phone').errors?.minlength ||
+                      userSignUpForm.get('phone').errors?.maxlength
+                    "
+                    >Phone number must contain 10 digits</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('phone').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>phone</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Adhaar Number </mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Adhaar Number"
+                  value=""
+                  formControlName="adharNumber"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('adharNumber').invalid &&
+                    userSignUpForm.get('adharNumber').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('adharNumber').errors?.required"
+                    >Adhaar number is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      userSignUpForm.get('adharNumber').errors?.minlength ||
+                      userSignUpForm.get('adharNumber').errors?.maxlength
+                    "
+                    >Adhaar number must contain 12 digits</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('adharNumber').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>payment</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  [type]="userPassHide ? 'password' : 'text'"
+                  matInput
+                  placeholder="Password"
+                  formControlName="password"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('password').invalid &&
+                    userSignUpForm.get('password').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('password').errors?.required"
+                    >password is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="userSignUpForm.get('password').errors?.minlength"
+                    >Password must contain minimum 8 characters</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('password').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="userPassHide = !userPassHide"
+                  >{{
+                    userPassHide ? "visibility_off" : "visibility"
+                  }}</mat-icon
+                >
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  [type]="userConfPassHide ? 'password' : 'text'"
+                  matInput
+                  placeholder="Confirm Password"
+                  formControlName="confirmPassword"
+                />
+                <mat-error
+                  *ngIf="
+                    userSignUpForm.get('confirmPassword').invalid &&
+                    userSignUpForm.get('confirmPassword').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      userSignUpForm.controls['confirmPassword'].hasError(
+                        'required'
+                      )
+                    "
+                    >Confirm Password is required</mat-error
+                  >
+
+                  <mat-error
+                    *ngIf="
+                      userSignUpForm.controls['confirmPassword'].hasError(
+                        'confirmPasswordValidator'
+                      )
+                    "
+                    >Password does not match</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="userSignUpForm.get('confirmPassword').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="userConfPassHide = !userConfPassHide"
+                  >{{
+                    userConfPassHide ? "visibility_off" : "visibility"
+                  }}</mat-icon
+                >
+              </mat-form-field>
+              <button
+                id="userSignup"
+                mat-button
+                [disabled]="!userform.form.valid || loadingUser"
+                color="primary"
+                type="submit"
+                (click)="onUserRegister()"
+              >
+                Sign up
+              </button>
+            </mat-tab>
+          </form>
+          <form
+            #companyFrom="ngForm"
+            [formGroup]="companySignUpForm"
+            class="form-container"
+            (ngSubmit)="onCompanyRegister()"
+          >
+            <mat-tab label="FOR COMPANY">
+              <div *ngIf="!Cvalid" class="card-full-width invalid">
+                {{ Cerrormsg }}
+              </div>
+              <div *ngIf="CIsSuccess" class="card-full-width valid">
+                {{ signUpResponse }}
+              </div>
+              <mat-form-field class="card-full-width">
+                <mat-label>Company's name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="companyName"
+                  value=""
+                  formControlName="companyName"
+                />
+                <mat-error
+                  *ngIf="
+                    companySignUpForm.get('companyName').invalid &&
+                    companySignUpForm.get('companyName').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      companySignUpForm.get('companyName').errors?.required
+                    "
+                    >Company Name is required</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companySignUpForm.get('companyName').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>person</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Work Email Address</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  placeholder="Email"
+                  value=""
+                  formControlName="companyEmail"
+                />
+                <mat-error
+                  *ngIf="
+                    companySignUpForm.get('companyEmail').invalid &&
+                    companySignUpForm.get('companyEmail').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      companySignUpForm.get('companyEmail').errors?.required
+                    "
+                    >Email is required</mat-error
+                  >
+                  <mat-error *ngIf="companySignUpForm.get('companyEmail').dirty"
+                    >Invalid email Id</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companySignUpForm.get('companyEmail').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Country</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Select Country"
+                  formControlName="country"
+                />
+                <mat-error
+                  *ngIf="
+                    companySignUpForm.get('country').invalid &&
+                    companySignUpForm.get('country').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="companySignUpForm.get('country').errors?.required"
+                    >Country is required</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companySignUpForm.get('country').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon matSuffix>business</mat-icon>
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  [type]="companyPassHide ? 'password' : 'text'"
+                  matInput
+                  placeholder="Password"
+                  formControlName="password"
+                />
+                <mat-error
+                  *ngIf="
+                    companySignUpForm.get('password').invalid &&
+                    companySignUpForm.get('password').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="companySignUpForm.get('password').errors?.required"
+                    >password is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="companySignUpForm.get('password').errors?.minlength"
+                    >Password must contain minimum 8 characters</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companySignUpForm.get('password').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="companyPassHide = !companyPassHide"
+                  >{{
+                    companyPassHide ? "visibility_off" : "visibility"
+                  }}</mat-icon
+                >
+              </mat-form-field>
+              <mat-form-field class="card-full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  [type]="companyConfPassHide ? 'password' : 'text'"
+                  matInput
+                  placeholder="Confirm Password"
+                  formControlName="confirmPassword"
+                />
+                <mat-error
+                  *ngIf="
+                    companySignUpForm.get('confirmPassword').invalid &&
+                    companySignUpForm.get('confirmPassword').touched
+                  "
+                >
+                  <mat-error
+                    *ngIf="
+                      companySignUpForm.get('confirmPassword').errors?.required
+                    "
+                    >Confirm Password is required</mat-error
+                  >
+                  <mat-error
+                    *ngIf="
+                      companySignUpForm.controls['confirmPassword'].hasError(
+                        'confirmPasswordValidator'
+                      )
+                    "
+                    >Password does not match</mat-error
+                  >
+                </mat-error>
+                <mat-icon
+                  matSuffix
+                  *ngIf="companySignUpForm.get('confirmPassword').valid"
+                  style="color: #0bc00b; margin-right: 5px"
+                  >check</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  style="cursor: pointer"
+                  (click)="companyConfPassHide = !companyConfPassHide"
+                  >{{
+                    companyConfPassHide ? "visibility_off" : "visibility"
+                  }}</mat-icon
+                >
+              </mat-form-field>
+              <button
+                id="companySignup"
+                [disabled]="!companyFrom.form.valid || loadingComp"
+                mat-button
+                color="primary"
+                type="submit"
+                (click)="onCompanyRegister()"
+              >
+                Sign Up
+              </button>
+            </mat-tab>
+          </form>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+    <!-- <mat-card class="signup-card">
+      <div class="no-account">Don't have an BlueCollar account?</div>
+      <div>
+        <a routerLink="/signup"
+          ><button mat-button class="sign-up">Sign Up</button></a
+        >
+      </div>
+    </mat-card>   -->
+  </div>
+</div>
+</main>

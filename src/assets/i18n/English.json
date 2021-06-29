@@ -1,0 +1,122 @@
+
+{
+  "home": {
+
+    "login": "Login",
+    "createAccount" : "Create Account",
+    "naukriMatlab" : "Naukri Matlab",
+    "hire" : "Hire staff or search jobs in All Cities",
+    "postNewJob" : "Post New Job",
+    "searchJobs" : "Search Jobs",
+    "hireLocal" : "Hire Local Staff",
+    "easyFast" : "Easy, Fast & Free",
+    "clients" : "Loved by trusted startups",
+    "home": "Home",
+    "logout": "Logout",
+    "menu": "Menu"
+
+  },
+
+  "user": {
+    "filters" : "Filters",
+    "filterBy" : "Filter By",
+    "category" : "Category",
+    "location" : "Location",
+    "Apply" : "Apply",
+    "reset" : "Reset",
+    "search" : "Search",
+    "searchFor" : "Search for jobs",
+    "latestJobs" : "Latest Jobs",
+    "Save" : "Save",
+    "Saved" : "Saved",
+    "Applied" : "Applied",
+    "remove" : "Remove",
+    "allJobs" : "Jobs in All Cities",
+    "allCities" : "All Cities",
+    "allCategories" : "All Categories",
+
+    "jobNotFound" : "Job not found",
+    "company": "Company",
+    "postedOn": "Posted on",
+    "salaryRange": "Salary",
+
+    "savedJobs": "Saved Jobs",
+    "appliedJobs": "Applied Jobs",
+
+    "savedInfo": "Here is the list of your Saved Jobs, apply now.",
+    "appliedInfo": "Here is the list of your Applied Jobs.",
+
+    "userDetails" : "Personal Details",
+    "name": "Name",
+    "aadhar" : "Aadhar Number",
+    "dob" : "Date of Birth",
+    "gender" : "Gender",
+    "qualification" : "Qualification",
+    "exp" : "Experience in years",
+    "city" : "Current City",
+    "language": "Language",
+    "male": "Male",
+    "female": "Female",
+    "update": "Update",
+
+    "Profile" : "Profile",
+    "myProfile" : "My Profile",
+    "perMonth" : "Per Month",
+
+    "inProcess" : "In Process",
+    "hired" : "Hired",
+    "rejected" : "Rejected"
+
+  },
+
+  "company": {
+    "search":"Search job posts by title",
+    "category":"Select a category",
+    "all":"All category",
+    "driver":"Driver",
+    "peon":"Peon",
+    "cook":"Cook",
+    "deliveryBoy":"Delivery Boy",
+    "household":"Household worker",
+    "repairng":"Repairing Work",
+    "beautician": "Beautician",
+    "security": "Security",
+    "SearchNotFound":"Searched job not found",
+    "noPost":"You haven't posted any jobs",
+    "latestJobs":"Latest Jobs",
+    "company":"Company",
+    "comapnyCategory":"Category",
+    "location":"Location",
+    "postedOn":"Posted on",
+    "lastDate":"Last Date to Apply",
+    "salaryRange":"Salary Range",
+    "perMonth":"Per Month",
+    "update":"Update",
+    "delete":"Delete",
+    "closed":"HIRING CLOSED",
+    "sn":"SNo.",
+    "name":"Name",
+    "phone":"Phone",
+    "dob":"Date of Birth",
+    "gender":"Gender",
+    "status":"Status",
+    "hired":"HIRED",
+    "rejected":"REJECTED",
+    "process":"PROCESS",
+    "noAppl":"No Applicants",
+    "totalAppli":"Total Applicants",
+    "appliFor":"APPLICANTS for",
+
+    "numJobpost":"Number of jobs posted",
+    "numActpost":"Number of active jobs",
+    "numclosedJob":"Number of jobs closed",
+    "filterJobCategory":"Filter jobs by Category",
+    "addnewjob":"Add a new Job",
+    "addjob":"ADD JOB",
+
+    "home":"Home",
+    "myAcc":"My account",
+    "logout":"Logout"
+
+  }
+}
